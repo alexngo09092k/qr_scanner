@@ -1,4 +1,5 @@
 import 'package:fluttering_ads/fluttering_ads.dart';
+import 'package:fluttering_analytics/fluttering_analytics.dart';
 import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/configuration.dart';
 import 'package:qr_scanner/common/theme.dart';
@@ -16,6 +17,7 @@ class _AppState extends AwesomeAppState<App> {
 
   @override
   void initState() {
+    AwesomeAnalytics.instance.sendEvent("Open App", {});
     AwesomeAdvertisement.instance.handleAd();
     super.initState();
   }
