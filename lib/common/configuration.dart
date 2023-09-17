@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttering_analytics/fluttering_analytics.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:qr_scanner/models/config/bussiness_config/bussiness_config.dart';
 import 'package:qr_scanner/common/constants.dart';
@@ -38,6 +39,10 @@ class Configuration {
   AdvertisementConfig _advertisement = DefaultConfig.advertisement;
   AdvertisementConfig get advertisement => _advertisement;
 
+  /// ANALYTICS CONFIGURATIONS
+  AnalyticsConfig _analytics = DefaultConfig.analytics;
+  AnalyticsConfig get analytics => _analytics;
+
   Future<void> loadLocalConfig(Map<String, dynamic> defaultConfig) async {
     fromEnviroment(defaultConfig);
 
@@ -60,6 +65,10 @@ class Configuration {
 
     if (enviroment['iap'] != null) {
       _iap = IAPConfig.fromMap(enviroment['iap']);
+    }
+
+    if(enviroment['analytics'] != null) {
+      _analytics = AnalyticsConfig.fromMap(enviroment['analytics']);
     }
   }
 }
@@ -148,6 +157,12 @@ abstract class DefaultConfig {
     enable: kDebugMode,
     products: [],
     providers: [IAPProvider.google, IAPProvider.huawei],
+  );
+
+  /// DEFAULT ANALYTICS CONFIG
+  static AnalyticsConfig analytics = const AnalyticsConfig(
+    enable: kDebugMode,
+    providers: [AnalyticsProvider.google, AnalyticsProvider.huawei],
   );
 }
 

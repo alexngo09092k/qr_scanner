@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_ads/fluttering_ads.dart';
+import 'package:fluttering_analytics/fluttering_analytics.dart';
 import 'package:fluttering_iap/iap/iap.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:qr_scanner/app.dart';
@@ -23,6 +24,7 @@ void main() {
       AwesomeAdvertisement.instance,
       AwesomeIAP.instance,
       AwesomeRemoteConfig.instance,
+      AwesomeAnalytics.instance,
       AppThemeProvider(themeMode: ThemeMode.light, locale: const Locale('en')),
       HistoryProvider.instance,
     ],
@@ -49,6 +51,7 @@ void main() {
 
       AwesomeAdvertisement.instance.initial(Configuration.instance.advertisement);
       AwesomeIAP.instance.initial(Configuration.instance.iap);
+      AwesomeAnalytics.instance.initial(Configuration.instance.analytics);
 
       return true;
     },
