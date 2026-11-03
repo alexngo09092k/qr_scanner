@@ -70,6 +70,8 @@ class AppRoutes extends IAppRoutes {
         return buildRoute(const HomePage(), settings);
       case settingPage:
         return buildRoute(const SettingsPage(), settings);
+      case premiumPage:
+        return buildRoute(const PremiumPage(), settings);
       case generatePage:
         return buildRoute(const GeneratePage(), settings);
       case historyPage:

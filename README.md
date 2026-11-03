@@ -1,17 +1,42 @@
-# qr_scanner
+# QR Scanner
 
-A new Flutter project.
+Flutter QR Code Scanner & Generator.
 
-## Getting Started
+## Dependencies
 
-This project is a starting point for a Flutter application.
+Private packages remain **git** dependencies (do not convert to path):
 
-A few resources to get you started if this is your first Flutter project:
+- `fluttering` → git@github.com:brennan992k/fluttering.git
+- `fluttering_ads`
+- `fluttering_iap`
+- `fluttering_remote_config`
+- `fluttering_analytics`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+You need SSH access to those repos (or replace URLs with your access method).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# qr-scanner
+```bash
+flutter pub get
+flutter run
+```
+
+## Completed features (this delivery)
+
+| Area | What was finished |
+|------|-------------------|
+| **MaintenancePage** | Full UI from remote/business config (title, message, link) |
+| **PremiumPage** | Remove-ads purchase UI + AwesomeIAP |
+| **ViewerPage** | Open / Call / Email / SMS / Maps, Copy, Share, Delete |
+| **ScannerResult** | Thumbnail badge after scan, tap → viewer |
+| **ScannerOverlay** | Dim overlay with scan-window cutout |
+| **Scanner flow** | After camera/gallery detect → vibrate + history + navigate Viewer |
+| **History** | Delete item (tap icon / long-press), Clear all |
+| **Settings** | Go Premium entry |
+| **AppRoutes** | premium route in onGenerateRoute |
+
+## Existing features (already in source)
+
+- Live scan (mobile_scanner), gallery, flashlight, camera switch, zoom
+- Generate 20+ QR types with forms
+- History scan/generate + local storage
+- Splash → home / maintenance by appMode
+- Ads / IAP / Analytics / Remote Config via fluttering_* packages

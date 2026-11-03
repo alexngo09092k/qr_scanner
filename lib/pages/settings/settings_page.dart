@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/configuration.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/utils/widget.dart';
@@ -147,6 +148,16 @@ class SettingsPage extends StatelessWidget {
         ],
       ),
       children: [
+        AppCard(
+          margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+          child: TileRow.defaultStyle(
+            context,
+            title: 'Go Premium — Remove Ads',
+            image: AppAssets.instance.icRate,
+            onTap: (_) => Navigator.of(context).pushNamed(AppRoutes.premiumPage),
+          ),
+        ),
+        SizedBox(height: AppDimensions.instance.padding),
         if (Configuration.instance.business.webLinks.isNotEmpty)
           AppCard(
             margin: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),

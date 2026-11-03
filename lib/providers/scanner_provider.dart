@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_format.dart';
@@ -38,7 +39,7 @@ abstract class IScannerProvider extends StorageProvider with Provider {
 
   ScannerSettings get settings;
 
-  ValueNotifier<BarcodeCapture?> get barcodeCapture;
+  ValueNotifier<BarcodeCapture> get barcodeCapture;
 
   void onDetect(BarcodeCapture capture);
 
@@ -57,7 +58,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   late MobileScannerController _controller;
   late ScannerSettings _settings;
 
-  final ValueNotifier<BarcodeCapture?> _barcodeCapture = ValueNotifier(null);
+  final ValueNotifier<BarcodeCapture> _barcodeCapture =
+      ValueNotifier<BarcodeCapture>(BarcodeCapture(barcodes: const [], raw: null));
 
   @override
   MobileScannerController get controller => _controller;
@@ -66,11 +68,12 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   ScannerSettings get settings => _settings;
 
   @override
-  ValueNotifier<BarcodeCapture?> get barcodeCapture => _barcodeCapture;
+  ValueNotifier<BarcodeCapture> get barcodeCapture => _barcodeCapture;
 
   @override
   void onDetect(BarcodeCapture capture) async {
     final List<Barcode> barcodes = capture.barcodes;
+    QR? detected;
     for (final barcode in barcodes) {
       if (barcode.rawValue == null) continue;
       Debug.log(jsonEncode(barcode.rawValue));
@@ -88,12 +91,24 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
       await Vibration.vibrate();
 
-      if (HistoryProvider.instance.isExists(qr)) break;
-      HistoryProvider.instance.addQR(qr);
+      // Update timestamp if exists, otherwise add
+      if (!HistoryProvider.instance.isExists(qr)) {
+        HistoryProvider.instance.addQR(qr);
+      }
+      detected = qr;
+      break; // handle first valid barcode
     }
 
     if (capture.barcodes.isNotEmpty) {
       _barcodeCapture.value = capture;
+    }
+
+    // Navigate to viewer with detected QR
+    if (detected != null) {
+      final nav = AwesomeAppState.navigatorKey.currentState;
+      if (nav != null) {
+        nav.pushNamed(AppRoutes.viewerPage, arguments: detected);
+      }
     }
   }
 
@@ -140,6 +155,14 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
     
           if (!HistoryProvider.instance.isExists(qr)) {
             HistoryProvider.instance.addQR(qr);
+          }
+          _barcodeCapture.value = BarcodeCapture(
+            barcodes: [barcode],
+            raw: rawData,
+          );
+          final nav = AwesomeAppState.navigatorKey.currentState;
+          if (nav != null) {
+            nav.pushNamed(AppRoutes.viewerPage, arguments: qr);
           }
         }
       }

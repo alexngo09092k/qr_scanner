@@ -6,6 +6,7 @@ import 'package:qr_scanner/pages/scanner/scanner/scanner_error.dart';
 import 'package:qr_scanner/pages/scanner/scanner/scanner_result.dart';
 import 'package:qr_scanner/pages/scanner/scanner/scanner_settings.dart';
 import 'package:qr_scanner/providers/scanner_provider.dart';
+import 'package:qr_scanner/widgets/app_use/scanning_effect/scanner_overlay.dart';
 import 'package:qr_scanner/widgets/app_use/scanning_effect/scanning_effect.dart';
 
 class Scanner extends StatelessWidget {
@@ -29,23 +30,23 @@ class Scanner extends StatelessWidget {
         PropConsumer<ScannerProvider, MobileScannerController>(
           select: (_) => _.controller,
           builder: (_, __, provider, controller) {
-            Debug.log("Hello=================>");
             return MobileScanner(
-            scanWindow: scanWindow,
-            controller: controller,
-            onDetect: provider.onDetect,
-            onScannerStarted: provider.onStarted,
-            errorBuilder: (_, error, __) => ScannerError(error: error),
-          );
-          }
+              scanWindow: scanWindow,
+              controller: controller,
+              onDetect: provider.onDetect,
+              onScannerStarted: provider.onStarted,
+              errorBuilder: (_, error, __) => ScannerError(error: error),
+            );
+          },
         ),
+        ScannerOverlay(scanWindow: scanWindow),
         ScanningEffect(
           scanWindow: scanWindow,
           scanningColor: Theme.of(context).colorScheme.primary,
           borderLineColor: Theme.of(context).colorScheme.primary,
         ),
         Positioned(
-          top: AppDimensions.instance.padding,
+          top: MediaQuery.of(context).padding.top + AppDimensions.instance.padding,
           right: AppDimensions.instance.padding,
           child: const ScannerResult(),
         ),
