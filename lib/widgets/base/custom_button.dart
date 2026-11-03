@@ -7,7 +7,7 @@ class CustomButton extends StatelessWidget {
     Key? key,
     this.gradient,
     this.titleColor,
-    this.titleSize = 14,
+    this.titleSize = 15,
     this.color,
     this.width,
     this.height,
@@ -34,43 +34,56 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final useGradient = gradient != null || color == null;
+    final bg = color ?? Theme.of(context).colorScheme.primary;
+
     return GestureDetector(
       onTap: isDisabled ? null : onTap,
       child: Opacity(
-        opacity: isDisabled ? 0.5 : 1,
-        child: Container(
+        opacity: isDisabled ? 0.45 : 1,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
           height: height,
           width: width,
           padding: EdgeInsets.symmetric(
-            horizontal: AppDimensions.instance.padding,
-            vertical: AppDimensions.instance.paddingX(0.8),
+            horizontal: AppDimensions.instance.paddingX(1.1),
+            vertical: AppDimensions.instance.paddingX(0.9),
           ),
           decoration: BoxDecoration(
-            color: color ?? Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-            gradient: gradient,
-            boxShadow: [AppColors.instance.boxShadow],
+            color: useGradient && gradient == null && color == null
+                ? null
+                : (useGradient && gradient != null ? null : bg),
+            gradient: useGradient
+                ? (gradient ?? AppColors.instance.gradient)
+                : null,
+            borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.9)),
+            boxShadow: isDisabled
+                ? null
+                : [AppColors.instance.glowPrimary],
           ),
           child: isLoading
-              ? CupertinoActivityIndicator(color: titleColor ?? Theme.of(context).colorScheme.onPrimary)
+              ? CupertinoActivityIndicator(
+                  color: titleColor ?? Colors.white,
+                )
               : child ??
                   Center(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        icon ?? const SizedBox(),
-                        icon != null
-                            ? SizedBox(width: AppDimensions.instance.paddingX(0.5))
-                            : const SizedBox(),
+                        if (icon != null) ...[
+                          icon!,
+                          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
+                        ],
                         if (title != null)
                           Text(
                             title!,
                             style: TextStyle(
-                              color: titleColor ?? Theme.of(context).colorScheme.onPrimary,
+                              color: titleColor ?? Colors.white,
                               fontSize: titleSize,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.15,
                             ),
-                          )
+                          ),
                       ],
                     ),
                   ),

@@ -6,7 +6,6 @@ import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/configuration.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/config/bussiness_config/bussiness_config.dart';
-// import 'package:qr_scanner/utils/widget.dart';
 import 'package:qr_scanner/widgets/base/custom_image.dart';
 
 class SplashPage extends StatefulWidget {
@@ -22,35 +21,17 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
 
   @override
   void onSplash(bool resultOnWillSplash) async {
-    // final start = DateTime.now().millisecondsSinceEpoch;
-    // if (await ClientHttp.instance.safeEnvironment()) {
-      // if (resultOnWillSplash) {
-      //   final end = DateTime.now().millisecondsSinceEpoch;
-      //   if ((end - start) >= time) {
-          _goTo();
-      //   } else {
-      //     Future.delayed(Duration(milliseconds: (time - ((end - start)))), _goTo);
-      //   }
-      // } else {
-      //   WidgetUtils.instance.showWarningPopup(
-      //     title: "Open App",
-      //     message: "Please try again or open the app again!",
-      //     retry: (_) => AwesomeApp.instance?.restart(),
-      //   );
-      // }
-    // } else {
-    //   WidgetUtils.instance.showNoInternetPopup(retry: (_) => onSplash(resultOnWillSplash));
-    // }
+    _goTo();
   }
 
-  _goTo() {
+  void _goTo() {
     if (!_goToApp) {
       _goToApp = true;
       _mode();
     }
   }
 
-  _mode() {
+  void _mode() {
     switch (Configuration.instance.business.appMode) {
       case AppMode.debug:
       case AppMode.production:
@@ -70,54 +51,78 @@ class _SplashPageState extends AwesomeSplashState<SplashPage> {
     final widthTotal = logoWidth + textWidth + AppDimensions.instance.padding;
     final logoAlpha = (widthTotal / 2 - logoWidth / 2);
     final textAlpha = (widthTotal / 2 - textWidth / 2);
+
     return Scaffold(
-      body: Center(
-        child: Transform.translate(
-          offset: Offset(0, -logoWidth/3),
-          child: AwesomeAnimation<double>.tweenSequence(
-            duration: Duration(milliseconds: time - 200),
-            items: [
-              TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0), weight: 0.6),
-              TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.3),
-              TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.1),
-            ],
-            builder: (_, __, animation, ___) => Stack(
-              alignment: Alignment.center,
-              children: [
-                Transform.translate(
-                  offset: Offset(-logoAlpha * animation.value, 0),
-                  child: CustomImage(
-                    image: Configuration.instance.business.appLogo,
-                    width: logoWidth * (2 - animation.value),
-                  ),
-                ),
-                Transform.translate(
-                  offset: Offset(textAlpha, 0),
-                  child: SizedBox(
-                    width: textWidth,
-                    child: Opacity(
-                      opacity: animation.value >= 1 ? 1 : 0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Text(
-                              Configuration.instance.business.appName,
-                              style: Theme.of(context).textTheme.headlineMedium!,
-                            ),
-                          ),
-                          Text(
-                            Configuration.instance.business.appBio,
-                            style: Theme.of(context).textTheme.bodyLarge!,
-                          ),
-                        ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(gradient: AppColors.instance.splashGradient),
+        child: Center(
+          child: Transform.translate(
+            offset: Offset(0, -logoWidth / 3),
+            child: AwesomeAnimation<double>.tweenSequence(
+              duration: Duration(milliseconds: time - 200),
+              items: [
+                TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0), weight: 0.6),
+                TweenSequenceItem(tween: Tween<double>(begin: 0, end: 0.5), weight: 0.3),
+                TweenSequenceItem(tween: Tween<double>(begin: 0.5, end: 1), weight: 0.1),
+              ],
+              builder: (_, __, animation, ___) => Stack(
+                alignment: Alignment.center,
+                children: [
+                  Transform.translate(
+                    offset: Offset(-logoAlpha * animation.value, 0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.12),
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(color: Colors.white.withOpacity(0.2)),
+                      ),
+                      child: CustomImage(
+                        image: Configuration.instance.business.appLogo,
+                        width: logoWidth * (2 - animation.value),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Transform.translate(
+                    offset: Offset(textAlpha, 0),
+                    child: SizedBox(
+                      width: textWidth,
+                      child: Opacity(
+                        opacity: animation.value >= 1 ? 1 : 0,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Text(
+                                Configuration.instance.business.appName,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                      letterSpacing: -0.4,
+                                    ),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              Configuration.instance.business.appBio,
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: Colors.white.withOpacity(0.8),
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -27,6 +27,7 @@ class Input extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextField(
       enabled: enabled,
       controller: controller,
@@ -34,18 +35,36 @@ class Input extends StatelessWidget {
       onChanged: onChanged,
       onSubmitted: onSubmitted,
       onEditingComplete: onEditingComplete,
+      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        hintText: hintText,
+        filled: true,
+        fillColor: isDark ? const Color(0xFF0C1220) : const Color(0xFFF7F8FC),
         contentPadding: EdgeInsets.symmetric(
-          vertical: AppDimensions.instance.paddingX(0.5),
+          vertical: AppDimensions.instance.paddingX(0.85),
           horizontal: AppDimensions.instance.padding,
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+          borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.75)),
         ),
-        hintText: hintText,
-        suffixIcon: suffixIcon,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.75)),
+          borderSide: BorderSide(
+            color: isDark ? const Color(0xFF1C2436) : const Color(0xFFE8ECF4),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.75)),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+            width: 1.6,
+          ),
+        ),
       ),
     );
   }

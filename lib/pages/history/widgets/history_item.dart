@@ -48,28 +48,28 @@ class HistoryItem extends StatelessWidget {
       onLongPress: () => _onDelete(context),
       child: AppCard(
         margin: EdgeInsets.only(
-          bottom: AppDimensions.instance.paddingX(0.75),
+          bottom: 12,
           left: AppDimensions.instance.padding,
           right: AppDimensions.instance.padding,
         ),
-        padding: EdgeInsets.all(AppDimensions.instance.paddingX(0.9)),
+        padding: const EdgeInsets.all(14),
         child: Row(
           children: [
             Container(
-              width: 46,
-              height: 46,
+              width: 48,
+              height: 48,
               decoration: BoxDecoration(
-                color: primary.withOpacity(0.10),
+                gradient: AppColors.instance.gradientSoft,
                 borderRadius: BorderRadius.circular(14),
               ),
               alignment: Alignment.center,
               child: CustomIcon(
                 qr.type.icon,
-                size: AppDimensions.instance.iconX(1.2),
+                size: 22,
                 color: primary,
               ),
             ),
-            SizedBox(width: AppDimensions.instance.paddingX(0.85)),
+            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,6 +78,7 @@ class HistoryItem extends StatelessWidget {
                     qr.rawData,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w600,
+                          letterSpacing: -0.2,
                         ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -96,15 +97,15 @@ class HistoryItem extends StatelessWidget {
             GestureDetector(
               onTap: () => _onDelete(context),
               child: Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.error.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
                   Icons.delete_outline_rounded,
-                  color: Theme.of(context).colorScheme.error.withOpacity(0.85),
-                  size: 20,
+                  color: Theme.of(context).colorScheme.error.withOpacity(0.9),
+                  size: 18,
                 ),
               ),
             ),

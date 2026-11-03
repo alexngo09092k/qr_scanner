@@ -22,20 +22,19 @@ class HomeBottomNavigation extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        AppDimensions.instance.padding,
+        AppDimensions.instance.paddingX(1.1),
         0,
-        AppDimensions.instance.padding,
-        AppDimensions.instance.paddingX(0.75),
+        AppDimensions.instance.paddingX(1.1),
+        AppDimensions.instance.paddingX(0.85),
       ),
       child: Container(
         height: AppDimensions.instance.bottomNavHeight,
         decoration: BoxDecoration(
-          color: surface,
-          borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(1.4)),
+          color: surface.withOpacity(isDark ? 0.92 : 0.96),
+          borderRadius: BorderRadius.circular(28),
           boxShadow: [AppColors.instance.navShadow],
           border: Border.all(
-            color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE8ECF4),
-            width: 1,
+            color: isDark ? const Color(0xFF1C2436) : const Color(0xFFE8ECF4),
           ),
         ),
         child: Row(
@@ -46,19 +45,18 @@ class HomeBottomNavigation extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 onTap: () => onChange(e),
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 220),
+                  duration: const Duration(milliseconds: 240),
                   curve: Curves.easeOutCubic,
-                  margin: const EdgeInsets.all(6),
+                  margin: const EdgeInsets.all(7),
                   decoration: BoxDecoration(
                     gradient: selected ? AppColors.instance.gradient : null,
-                    color: selected ? null : Colors.transparent,
-                    borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+                    borderRadius: BorderRadius.circular(20),
                     boxShadow: selected
                         ? [
                             BoxShadow(
-                              color: AppColors.instance.lightPrimary.withOpacity(0.35),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4),
+                              color: AppColors.instance.lightPrimary.withOpacity(0.4),
+                              blurRadius: 14,
+                              offset: const Offset(0, 5),
                             ),
                           ]
                         : null,
@@ -68,21 +66,18 @@ class HomeBottomNavigation extends StatelessWidget {
                     children: [
                       CustomIcon(
                         e.icon,
-                        color: selected
-                            ? Colors.white
-                            : Theme.of(context).disabledColor,
-                        size: AppDimensions.instance.iconX(1.05),
+                        color: selected ? Colors.white : Theme.of(context).disabledColor,
+                        size: 22,
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 3),
                       Text(
                         e.label,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                              color: selected
-                                  ? Colors.white
-                                  : Theme.of(context).disabledColor,
-                              fontSize: 11,
-                            ),
+                        style: TextStyle(
+                          fontSize: 10.5,
+                          fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                          color: selected ? Colors.white : Theme.of(context).disabledColor,
+                          letterSpacing: 0.1,
+                        ),
                       ),
                     ],
                   ),

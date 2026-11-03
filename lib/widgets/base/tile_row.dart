@@ -4,7 +4,14 @@ import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 
 class TileRow extends StatelessWidget {
-  const TileRow({super.key, this.leading, required this.main, this.action, this.onTap, this.padding});
+  const TileRow({
+    super.key,
+    this.leading,
+    required this.main,
+    this.action,
+    this.onTap,
+    this.padding,
+  });
 
   final Widget? leading;
   final Widget main;
@@ -19,46 +26,71 @@ class TileRow extends StatelessWidget {
     void Function(BuildContext)? onTap,
     bool normal = false,
   }) {
+    final primary = Theme.of(context).colorScheme.primary;
     return TileRow(
-      padding: EdgeInsets.all(AppDimensions.instance.padding),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimensions.instance.padding,
+        vertical: AppDimensions.instance.paddingX(0.95),
+      ),
       onTap: onTap,
       main: Text(
         title,
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.1,
+            ),
       ),
       leading: image != null
           ? Padding(
-              padding: EdgeInsets.only(right: AppDimensions.instance.padding),
-              child: CustomIcon(
-                image,
-                normal: normal,
+              padding: EdgeInsets.only(right: AppDimensions.instance.paddingX(0.85)),
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  gradient: AppColors.instance.gradientSoft,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: primary.withOpacity(0.12)),
+                ),
+                alignment: Alignment.center,
+                child: CustomIcon(
+                  image,
+                  normal: normal,
+                  size: 18,
+                  color: primary,
+                ),
               ),
             )
           : null,
-      action: const CustomIcon(CupertinoIcons.forward),
+      action: Icon(
+        CupertinoIcons.chevron_forward,
+        size: 15,
+        color: Theme.of(context).disabledColor,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap != null ? () => onTap!(context) : null,
-      child: Container(
-        color: Colors.transparent,
-        padding: padding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                leading ?? const SizedBox(),
-                main,
-              ],
-            ),
-            action ?? const SizedBox(),
-          ],
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap != null ? () => onTap!(context) : null,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: padding ?? EdgeInsets.zero,
+          child: Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    leading ?? const SizedBox(),
+                    Flexible(child: main),
+                  ],
+                ),
+              ),
+              action ?? const SizedBox(),
+            ],
+          ),
         ),
       ),
     );

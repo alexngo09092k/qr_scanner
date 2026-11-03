@@ -23,9 +23,7 @@ class _HomePageState extends State<HomePage> {
   };
 
   void _onItemTapped(HomeNavigation _) {
-    setState(() {
-      _navigation = _;
-    });
+    setState(() => _navigation = _);
   }
 
   @override
@@ -33,7 +31,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: _pages[_navigation],
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 220),
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        child: KeyedSubtree(
+          key: ValueKey(_navigation),
+          child: _pages[_navigation]!,
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: HomeBottomNavigation(
         navigation: _navigation,

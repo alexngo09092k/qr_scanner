@@ -3,37 +3,29 @@ part of '../constants.dart';
 class AppDimensions {
   static final AppDimensions _instance = AppDimensions._internal();
   static AppDimensions get instance => _instance;
-
   factory AppDimensions() => _instance;
-
   AppDimensions._internal();
 
-  /// FONT SIZE
   final double fontsize = 14;
   double fontsizeX(double x) => fontsize * x;
 
-  /// PADDING
   final double padding = 16;
   double paddingX(double x) => padding * x;
 
-  /// RADIUS
-  final double radius = 18;
+  final double radius = 20;
   double radiusX(double x) => radius * x;
 
-  /// ICON
   final double icon = 22;
   double iconX(double x) => icon * x;
 
-  /// Bottom nav clearance
-  final double bottomNavHeight = 72;
+  final double bottomNavHeight = 74;
 
-  /// GRID DELEGATE
   SliverGridDelegateWithFixedCrossAxisCount get gridDelegate =>
       SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: padding * 0.75,
-        mainAxisSpacing: padding * 0.75,
-        childAspectRatio: 0.92,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 0.88,
       );
 
   Size get gridItemSize => Size(

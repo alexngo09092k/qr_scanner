@@ -9,106 +9,98 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
       },
     ),
   );
-
-  final colors = AppColors.instance;
+  final c = AppColors.instance;
+  final d = AppDimensions.instance;
 
   return base.copyWith(
     brightness: Brightness.dark,
-    primaryColor: colors.darkPrimary,
-    scaffoldBackgroundColor: colors.darkBackground,
-    canvasColor: colors.darkBackground,
-    cardColor: colors.darkSurface,
-    splashColor: colors.darkPrimary.withOpacity(0.12),
-    highlightColor: colors.darkPrimary.withOpacity(0.06),
-    dividerColor: const Color(0xFF1E293B),
+    primaryColor: c.darkPrimary,
+    scaffoldBackgroundColor: c.darkBackground,
+    canvasColor: c.darkBackground,
+    cardColor: c.darkSurface,
+    splashColor: c.darkPrimary.withOpacity(0.12),
+    highlightColor: c.darkPrimary.withOpacity(0.06),
+    dividerColor: const Color(0xFF1C2436),
     disabledColor: const Color(0xFF64748B),
-    dialogBackgroundColor: colors.darkSurface,
-
+    dialogBackgroundColor: c.darkSurface,
     colorScheme: base.colorScheme.copyWith(
       brightness: Brightness.dark,
-      primary: colors.darkPrimary,
-      onPrimary: colors.darkOnPrimary,
-      secondary: colors.darkSecondary,
-      onSecondary: colors.darkOnSecondary,
-      background: colors.darkBackground,
-      onBackground: colors.darkOnBackground,
-      surface: colors.darkSurface,
-      onSurface: colors.darkOnSurface,
-      error: colors.darkError,
-      onError: colors.darkOnPrimary,
+      primary: c.darkPrimary,
+      onPrimary: c.darkOnPrimary,
+      secondary: c.darkSecondary,
+      onSecondary: c.darkOnSecondary,
+      background: c.darkBackground,
+      onBackground: c.darkOnBackground,
+      surface: c.darkSurface,
+      onSurface: c.darkOnSurface,
+      error: c.darkError,
+      onError: c.darkOnPrimary,
     ),
-
     appBarTheme: AppBarTheme(
       elevation: 0,
+      scrolledUnderElevation: 0,
       centerTitle: true,
-      backgroundColor: colors.darkBackground,
-      foregroundColor: colors.darkOnBackground,
+      backgroundColor: c.darkBackground,
+      foregroundColor: c.darkOnBackground,
       titleTextStyle: TextStyle(
         fontFamily: 'Inter',
-        fontSize: AppDimensions.instance.fontsizeX(1.25) * scale,
+        fontSize: d.fontsizeX(1.2) * scale,
         fontWeight: FontWeight.w700,
-        color: colors.darkOnBackground,
+        letterSpacing: -0.2,
+        color: c.darkOnBackground,
       ),
-      iconTheme: IconThemeData(
-        color: colors.darkOnBackground,
-        size: AppDimensions.instance.icon,
-      ),
+      iconTheme: IconThemeData(color: c.darkOnBackground, size: d.icon),
     ),
-
     cardTheme: CardThemeData(
-      color: colors.darkSurface,
+      color: c.darkSurface,
       elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
-      ),
       margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(d.radius),
+      ),
     ),
-
-    iconTheme: IconThemeData(
-      color: colors.darkOnBackground,
-      size: AppDimensions.instance.icon,
-    ),
-
+    iconTheme: IconThemeData(color: c.darkOnBackground, size: d.icon),
     textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: colors.darkOnBackground,
-      displayColor: colors.darkOnBackground,
+      bodyColor: c.darkOnBackground,
+      displayColor: c.darkOnBackground,
     ),
-
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: const Color(0xFF0F1524),
+      fillColor: const Color(0xFF0C1220),
       contentPadding: EdgeInsets.symmetric(
-        horizontal: AppDimensions.instance.padding,
-        vertical: AppDimensions.instance.paddingX(0.85),
+        horizontal: d.padding,
+        vertical: d.paddingX(0.9),
+      ),
+      hintStyle: TextStyle(
+        color: const Color(0xFF64748B),
+        fontSize: d.fontsize * scale,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
+        borderRadius: BorderRadius.circular(d.radiusX(0.75)),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
-        borderSide: const BorderSide(color: Color(0xFF1E293B)),
+        borderRadius: BorderRadius.circular(d.radiusX(0.75)),
+        borderSide: const BorderSide(color: Color(0xFF1C2436)),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
-        borderSide: BorderSide(color: colors.darkPrimary, width: 1.5),
+        borderRadius: BorderRadius.circular(d.radiusX(0.75)),
+        borderSide: BorderSide(color: c.darkPrimary, width: 1.6),
       ),
     ),
-
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      backgroundColor: colors.darkPrimary,
+      backgroundColor: c.darkPrimary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
+        borderRadius: BorderRadius.circular(d.radiusX(0.7)),
       ),
     ),
-
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: colors.darkPrimary,
-      foregroundColor: colors.darkOnPrimary,
-      elevation: 4,
+      backgroundColor: c.darkPrimary,
+      foregroundColor: c.darkOnPrimary,
+      elevation: 6,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+        borderRadius: BorderRadius.circular(d.radius),
       ),
     ),
   );

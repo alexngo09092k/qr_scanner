@@ -13,15 +13,14 @@ class HistoryTab extends StatelessWidget {
     return ValueListenableBuilder<QRSource>(
       valueListenable: tab,
       builder: (_, value, __) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
           child: Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color(0xFF0F1524)
-                  : const Color(0xFFE8ECF4),
-              borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+              color: isDark ? const Color(0xFF0C1220) : const Color(0xFFE4E8F1),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Row(
               children: QRSource.values.map((source) {
@@ -31,22 +30,18 @@ class HistoryTab extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () => onChanged(source),
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: EdgeInsets.symmetric(
-                        vertical: AppDimensions.instance.paddingX(0.65),
-                      ),
+                      duration: const Duration(milliseconds: 220),
+                      curve: Curves.easeOutCubic,
+                      padding: const EdgeInsets.symmetric(vertical: 11),
                       decoration: BoxDecoration(
                         gradient: selected ? AppColors.instance.gradient : null,
-                        color: selected ? null : Colors.transparent,
-                        borderRadius: BorderRadius.circular(
-                          AppDimensions.instance.radiusX(0.85),
-                        ),
+                        borderRadius: BorderRadius.circular(13),
                         boxShadow: selected
                             ? [
                                 BoxShadow(
-                                  color: AppColors.instance.lightPrimary.withOpacity(0.3),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 3),
+                                  color: AppColors.instance.lightPrimary.withOpacity(0.32),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
                                 ),
                               ]
                             : null,
@@ -54,12 +49,13 @@ class HistoryTab extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         label,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: selected
-                                  ? Colors.white
-                                  : Theme.of(context).disabledColor,
-                            ),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 13.5,
+                          color: selected
+                              ? Colors.white
+                              : Theme.of(context).disabledColor,
+                        ),
                       ),
                     ),
                   ),

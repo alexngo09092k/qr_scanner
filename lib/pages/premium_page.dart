@@ -72,7 +72,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
                 alreadyPurchased ? 'You are Premium' : 'Remove Ads',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w800, letterSpacing: -0.3,
                     ),
               ),
               SizedBox(height: AppDimensions.instance.paddingX(0.5)),
@@ -140,7 +140,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w800, letterSpacing: -0.3,
                         ),
                       ),
                       if (primaryProduct.info != null)
