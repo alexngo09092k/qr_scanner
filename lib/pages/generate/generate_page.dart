@@ -91,7 +91,7 @@ class GeneratePage extends StatelessWidget {
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.only(
-              bottom: 100,
+              bottom: 120,
               left: AppDimensions.instance.padding,
               right: AppDimensions.instance.padding,
               top: AppDimensions.instance.padding,

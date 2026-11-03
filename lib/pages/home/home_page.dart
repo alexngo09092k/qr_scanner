@@ -31,6 +31,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: _pages[_navigation],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: HomeBottomNavigation(

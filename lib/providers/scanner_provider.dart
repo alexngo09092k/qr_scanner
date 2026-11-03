@@ -135,8 +135,6 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
     );
     if (image == null) return;
 
-    // mobile_scanner analyzes the image and invokes onDetect when barcodes are found.
-    // onDetect already handles history, vibration, and navigation to Viewer.
     final found = await controller.analyzeImage(image.path);
     if (!found) {
       Debug.log('No barcode found in gallery image');

@@ -1,67 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_source.dart';
-import 'package:qr_scanner/widgets/base/custom_icon.dart';
-import 'package:qr_scanner/widgets/base/sliding_control.dart';
 
 class HistoryTab extends StatelessWidget {
-  const HistoryTab({
-    super.key,
-    required this.tab,
-    required this.onChanged,
-  });
+  const HistoryTab({super.key, required this.tab, required this.onChanged});
+
   final ValueNotifier<QRSource> tab;
   final Function(QRSource) onChanged;
 
-  void _onChangedTab(QRSource? type) {
-    if (type == null) return;
-    onChanged(type);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(AppDimensions.instance.padding),
-      child: ValueListenableBuilder(
-        valueListenable: tab,
-        builder: (_, value, __) => SizedBox(
-          width: double.infinity,
-          child: SlidingControl<QRSource>(
-            value: value,
-            color: Theme.of(context).colorScheme.primary,
-            background: Theme.of(context).cardColor,
-            children: QRSource.values.asMap().map(
-                  (_, e) => MapEntry(
-                    e,
-                    Padding(
+    return ValueListenableBuilder<QRSource>(
+      valueListenable: tab,
+      builder: (_, value, __) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
+          child: Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFF0F1524)
+                  : const Color(0xFFE8ECF4),
+              borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+            ),
+            child: Row(
+              children: QRSource.values.map((source) {
+                final selected = value == source;
+                final label = source == QRSource.scan ? 'Scanned' : 'Generated';
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () => onChanged(source),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppDimensions.instance.padding,
-                        vertical: AppDimensions.instance.paddingX(0.5),
+                        vertical: AppDimensions.instance.paddingX(0.65),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomIcon(e.icon, color: e == value? AppColors.instance.white: null),
-                          SizedBox(width: AppDimensions.instance.paddingX(0.5)),
-                          Text(
-                            e.label,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: e == value? AppColors.instance.white: null,
+                      decoration: BoxDecoration(
+                        gradient: selected ? AppColors.instance.gradient : null,
+                        color: selected ? null : Colors.transparent,
+                        borderRadius: BorderRadius.circular(
+                          AppDimensions.instance.radiusX(0.85),
+                        ),
+                        boxShadow: selected
+                            ? [
+                                BoxShadow(
+                                  color: AppColors.instance.lightPrimary.withOpacity(0.3),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
                                 ),
-                          ),
-                        ],
+                              ]
+                            : null,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        label,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: selected
+                                  ? Colors.white
+                                  : Theme.of(context).disabledColor,
+                            ),
                       ),
                     ),
                   ),
-                ),
-            onValueChanged: _onChangedTab,
+                );
+              }).toList(),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

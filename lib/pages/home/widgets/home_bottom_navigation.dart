@@ -10,56 +10,87 @@ class HomeBottomNavigation extends StatelessWidget {
     required this.onChange,
     required this.current,
   });
+
   final HomeNavigation navigation;
   final Function(HomeNavigation) onChange;
   final HomeNavigation current;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.only(
-        topRight: Radius.circular(AppDimensions.instance.radius),
-        topLeft: Radius.circular(AppDimensions.instance.radius),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final surface = Theme.of(context).colorScheme.surface;
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        AppDimensions.instance.padding,
+        0,
+        AppDimensions.instance.padding,
+        AppDimensions.instance.paddingX(0.75),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: HomeNavigation.values
-            .map(
-              (e) => Expanded(
-                child: GestureDetector(
-                  onTap: () => onChange(e),
-                  child: Container(
-                    color: Theme.of(context).cardColor,
-                    padding: EdgeInsets.symmetric(
-                      vertical: AppDimensions.instance.paddingX(0.5),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomIcon(
-                          e.icon,
-                          color: current == e
-                              ? Theme.of(context).colorScheme.primary
-                              : null,
-                        ),
-                        SizedBox(height: AppDimensions.instance.paddingX(0.5)),
-                        Text(
-                          e.label,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: current == e
-                                        ? Theme.of(context).colorScheme.primary
-                                        : null,
-                                  ),
-                        ),
-                      ],
-                    ),
+      child: Container(
+        height: AppDimensions.instance.bottomNavHeight,
+        decoration: BoxDecoration(
+          color: surface,
+          borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(1.4)),
+          boxShadow: [AppColors.instance.navShadow],
+          border: Border.all(
+            color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE8ECF4),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: HomeNavigation.values.map((e) {
+            final selected = current == e;
+            return Expanded(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => onChange(e),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeOutCubic,
+                  margin: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    gradient: selected ? AppColors.instance.gradient : null,
+                    color: selected ? null : Colors.transparent,
+                    borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+                    boxShadow: selected
+                        ? [
+                            BoxShadow(
+                              color: AppColors.instance.lightPrimary.withOpacity(0.35),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomIcon(
+                        e.icon,
+                        color: selected
+                            ? Colors.white
+                            : Theme.of(context).disabledColor,
+                        size: AppDimensions.instance.iconX(1.05),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        e.label,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                              color: selected
+                                  ? Colors.white
+                                  : Theme.of(context).disabledColor,
+                              fontSize: 11,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
-            .toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

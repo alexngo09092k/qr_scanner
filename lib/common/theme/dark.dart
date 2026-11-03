@@ -10,94 +10,106 @@ ThemeData getDarkTheme(BuildContext context, {double scale = 1}) {
     ),
   );
 
+  final colors = AppColors.instance;
+
   return base.copyWith(
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
+    primaryColor: colors.darkPrimary,
+    scaffoldBackgroundColor: colors.darkBackground,
+    canvasColor: colors.darkBackground,
+    cardColor: colors.darkSurface,
+    splashColor: colors.darkPrimary.withOpacity(0.12),
+    highlightColor: colors.darkPrimary.withOpacity(0.06),
+    dividerColor: const Color(0xFF1E293B),
+    disabledColor: const Color(0xFF64748B),
+    dialogBackgroundColor: colors.darkSurface,
 
-    textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.darkOnBackground,
-      displayColor:  AppColors.instance.darkOnBackground,
-      decorationColor: AppColors.instance.darkOnBackground,
-    ),
-
-    primaryTextTheme: buildTextTheme(base.primaryTextTheme, scale: scale).apply(
-      bodyColor: AppColors.instance.darkOnBackground,
-      displayColor:  AppColors.instance.darkOnBackground,
-      decorationColor: AppColors.instance.darkOnBackground,
-    ),
-
-    primaryColor: AppColors.instance.darkPrimary,
-
-    secondaryHeaderColor: base.secondaryHeaderColor,
-
-    /// ================== CARD =====================
-    cardColor: AppColors.instance.darkSurface,
-
-    textButtonTheme: base.textButtonTheme,
-
-    listTileTheme: base.listTileTheme,
-
-    /// =================== COLOR SCHEME ====================
     colorScheme: base.colorScheme.copyWith(
-      primary: AppColors.instance.darkPrimary,
-      onPrimary: AppColors.instance.darkOnPrimary,
-      onPrimaryContainer: AppColors.instance.darkOnPrimary,
-      secondary: AppColors.instance.darkSecondary,
-      onSecondary: AppColors.instance.darkOnSecondary,
-      onSecondaryContainer: AppColors.instance.darkOnSecondary,
-      background: AppColors.instance.darkBackground,
-      onBackground: AppColors.instance.darkOnBackground,
-      surface: AppColors.instance.darkSurface,
-      onSurface: AppColors.instance.darkOnSurface,
-      error: AppColors.instance.darkError,
-      onError: AppColors.instance.darkOnError,
+      brightness: Brightness.dark,
+      primary: colors.darkPrimary,
+      onPrimary: colors.darkOnPrimary,
+      secondary: colors.darkSecondary,
+      onSecondary: colors.darkOnSecondary,
+      background: colors.darkBackground,
+      onBackground: colors.darkOnBackground,
+      surface: colors.darkSurface,
+      onSurface: colors.darkOnSurface,
+      error: colors.darkError,
+      onError: colors.darkOnPrimary,
     ),
 
-    /// ====================== TEXT SELECTION THEME ======================
-    textSelectionTheme: base.textSelectionTheme,
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      centerTitle: true,
+      backgroundColor: colors.darkBackground,
+      foregroundColor: colors.darkOnBackground,
+      titleTextStyle: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: AppDimensions.instance.fontsizeX(1.25) * scale,
+        fontWeight: FontWeight.w700,
+        color: colors.darkOnBackground,
+      ),
+      iconTheme: IconThemeData(
+        color: colors.darkOnBackground,
+        size: AppDimensions.instance.icon,
+      ),
+    ),
 
-    /// ====================== SNACKBAR ======================
-    snackBarTheme: base.snackBarTheme,
+    cardTheme: CardThemeData(
+      color: colors.darkSurface,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+      ),
+      margin: EdgeInsets.zero,
+    ),
 
-    /// ====================== INDICATOR ======================
-    indicatorColor: base.indicatorColor,
-
-    progressIndicatorTheme: base.progressIndicatorTheme,
-
-    canvasColor: base.canvasColor,
-
-    /// ====================== ACTIVE COLOR ======================
-    primaryColorLight: base.primaryColorLight,
-
-    /// ====================== BACKGROUND AND DIALOG ======================
-    splashColor: AppColors.instance.darkBackground,
-    dialogBackgroundColor: AppColors.instance.darkSurface,
-    scaffoldBackgroundColor: AppColors.instance.darkBackground,
-
-    /// ====================== STATUS BAR ======================
-    appBarTheme: base.appBarTheme,
-
-    buttonTheme: base.buttonTheme,
-
-    tabBarTheme: base.tabBarTheme,
-
-    /// ====================== DISABLED ====================
-    disabledColor: base.disabledColor,
-
-    /// ======================= CARD =======================
-    cardTheme: base.cardTheme,
-
-    /// ======================== ICON =======================
-    iconTheme: base.iconTheme.copyWith(
-      color: AppColors.instance.darkOnBackground, 
+    iconTheme: IconThemeData(
+      color: colors.darkOnBackground,
       size: AppDimensions.instance.icon,
     ),
 
-    primaryIconTheme: base.primaryIconTheme,
+    textTheme: buildTextTheme(base.textTheme, scale: scale).apply(
+      bodyColor: colors.darkOnBackground,
+      displayColor: colors.darkOnBackground,
+    ),
 
-    /// ========================= INPUT ========================
-    inputDecorationTheme: base.inputDecorationTheme,
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: const Color(0xFF0F1524),
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: AppDimensions.instance.padding,
+        vertical: AppDimensions.instance.paddingX(0.85),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
+        borderSide: const BorderSide(color: Color(0xFF1E293B)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
+        borderSide: BorderSide(color: colors.darkPrimary, width: 1.5),
+      ),
+    ),
 
-    /// ========================= DIVIDER ========================
-    dividerColor: base.dividerColor,
+    snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: colors.darkPrimary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.instance.radiusX(0.7)),
+      ),
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: colors.darkPrimary,
+      foregroundColor: colors.darkOnPrimary,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
+      ),
+    ),
   );
 }
