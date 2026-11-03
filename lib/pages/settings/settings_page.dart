@@ -101,8 +101,7 @@ class SettingsPage extends StatelessWidget {
             if (Configuration.instance.business.shareApp.link != null) {
               Share.share(
                 Configuration.instance.business.shareApp.link!,
-                subject:
-                    '$appName - ${Configuration.instance.business.appBio}',
+                subject: '$appName - ${Configuration.instance.business.appBio}',
               );
             }
           },
@@ -133,9 +132,8 @@ class SettingsPage extends StatelessWidget {
 
   void _toggleTheme(BuildContext context) {
     final provider = ManagerProvider.of<IThemeProvider>();
-    final next = provider.themeMode == ThemeMode.dark
-        ? ThemeMode.light
-        : ThemeMode.dark;
+    final next =
+        provider.themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
     provider.changeThemeMode(next);
   }
 
@@ -278,6 +276,7 @@ class SettingsPage extends StatelessWidget {
           screen: s.settingsTitle,
           appBar: true,
           back: false,
+          scroll: true,
           center: Text(
             s.settingsTitle,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
