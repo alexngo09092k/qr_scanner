@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/pages/history/widgets/history_item.dart';
@@ -43,22 +44,58 @@ class _HistoryListState extends State<HistoryList> {
   Widget build(BuildContext context) {
     return PropConsumer<HistoryProvider, List<QR>>(
       select: (_) => (widget.type == QRSource.generate ? _.generateHistory : _.scanHistory),
-      builder: (_, __, ___, list) => StickyGroupedListView<QR, DateTime>(
-        elements: list,
-        itemScrollController: itemScrollController,
-        order: StickyGroupedListOrder.ASC,
-        padding: const EdgeInsets.only(bottom: 100),
-        groupBy: (QR element) => DateTime(
-          element.lastModified.year,
-          element.lastModified.month,
-          element.lastModified.day,
-        ),
-        groupComparator: (DateTime value1, DateTime value2) => value2.compareTo(value1),
-        itemComparator: (QR element1, QR element2) => element2.lastModified.compareTo(element1.lastModified),
-        floatingHeader: true,
-        groupSeparatorBuilder:(_) => _getGroupSeparator(context, _),
-        itemBuilder: (_, qr) => HistoryItem(qr: qr),
-      ),
+      builder: (_, __, ___, list) {
+        if (list.isEmpty) {
+          final s = S.of(context);
+          return Center(
+            child: Padding(
+              padding: EdgeInsets.all(AppDimensions.instance.paddingX(2)),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.qr_code_2_rounded,
+                    size: 56,
+                    color: Theme.of(context).disabledColor.withOpacity(0.5),
+                  ),
+                  SizedBox(height: AppDimensions.instance.padding),
+                  Text(
+                    s.noHistory,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    s.scanToStart,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).disabledColor,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+        return StickyGroupedListView<QR, DateTime>(
+          elements: list,
+          itemScrollController: itemScrollController,
+          order: StickyGroupedListOrder.ASC,
+          padding: const EdgeInsets.only(bottom: 100),
+          groupBy: (QR element) => DateTime(
+            element.lastModified.year,
+            element.lastModified.month,
+            element.lastModified.day,
+          ),
+          groupComparator: (DateTime value1, DateTime value2) => value2.compareTo(value1),
+          itemComparator: (QR element1, QR element2) => element2.lastModified.compareTo(element1.lastModified),
+          floatingHeader: true,
+          groupSeparatorBuilder: (_) => _getGroupSeparator(context, _),
+          itemBuilder: (_, qr) => HistoryItem(qr: qr),
+        );
+      },
     );
   }
 }
