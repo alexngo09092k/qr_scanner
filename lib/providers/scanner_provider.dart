@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:barcode_finder/barcode_finder.dart' as barfinder;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
@@ -34,7 +33,7 @@ import 'package:qr_scanner/providers/storage_provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:vibration/vibration.dart';
 
-abstract class IScannerProvider extends StorageProvider with Provider {
+abstract class IScannerProvider extends Provider implements StorageProvider {
   MobileScannerController get controller;
 
   ScannerSettings get settings;
@@ -59,7 +58,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   late ScannerSettings _settings;
 
   final ValueNotifier<BarcodeCapture> _barcodeCapture =
-      ValueNotifier<BarcodeCapture>(BarcodeCapture(barcodes: const [], raw: null));
+      ValueNotifier<BarcodeCapture>(
+          BarcodeCapture(barcodes: const [], raw: null));
 
   @override
   MobileScannerController get controller => _controller;
@@ -133,39 +133,13 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
     final XFile? image = await picker.pickImage(
       source: ImageSource.gallery,
     );
-    if (image != null) {
-      if (await controller.analyzeImage(image.path)) {
-        String? rawData = await barfinder.BarcodeFinder.scanFile(
-          path: image.path, 
-          formats: barfinder.BarcodeFormat.values,
-        );
-        if(rawData != null) {
-          Barcode barcode = Barcode(rawValue: rawData);
-          QRType type = checkQRType(barcode);
-          QRFormat? format = checkQRFormat(barcode);
-          final QR qr = QR(
-            rawData: barcode.rawValue!,
-            type: type,
-            source: QRSource.scan,
-            lastModified: DateTime.now(),
-            format: format ?? QRFormat.QrCode,
-          );
-    
-          await Vibration.vibrate();
-    
-          if (!HistoryProvider.instance.isExists(qr)) {
-            HistoryProvider.instance.addQR(qr);
-          }
-          _barcodeCapture.value = BarcodeCapture(
-            barcodes: [barcode],
-            raw: rawData,
-          );
-          final nav = AwesomeAppState.navigatorKey.currentState;
-          if (nav != null) {
-            nav.pushNamed(AppRoutes.viewerPage, arguments: qr);
-          }
-        }
-      }
+    if (image == null) return;
+
+    // mobile_scanner analyzes the image and invokes onDetect when barcodes are found.
+    // onDetect already handles history, vibration, and navigation to Viewer.
+    final found = await controller.analyzeImage(image.path);
+    if (!found) {
+      Debug.log('No barcode found in gallery image');
     }
   }
 
@@ -196,7 +170,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
-    return AsyncStorage.instance.remove(AsyncStorageKey.instance.scannerSettings);
+    return AsyncStorage.instance
+        .remove(AsyncStorageKey.instance.scannerSettings);
   }
 
   @override
@@ -204,9 +179,13 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   void syncFromStorage([bool notify = false]) {
-    String? scannerSettingsString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scannerSettings);
-    Debug.log("============= SCANNER SETTINGS $scannerSettingsString ============");
-    _settings = scannerSettingsString != null? ScannerSettings.fromJson(scannerSettingsString): ScannerSettings();
+    String? scannerSettingsString = AsyncStorage.instance
+        .getString(AsyncStorageKey.instance.scannerSettings);
+    Debug.log(
+        "============= SCANNER SETTINGS $scannerSettingsString ============");
+    _settings = scannerSettingsString != null
+        ? ScannerSettings.fromJson(scannerSettingsString)
+        : ScannerSettings();
     _controller = MobileScannerController(
       facing: _settings.facing,
       detectionSpeed: _settings.detectionSpeed,
@@ -224,7 +203,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
 
   @override
   Future<void> syncToStorage() {
-    return AsyncStorage.instance.setString(AsyncStorageKey.instance.scannerSettings, _settings.toJson());
+    return AsyncStorage.instance.setString(
+        AsyncStorageKey.instance.scannerSettings, _settings.toJson());
   }
 
   void _onSettingsChanged() {

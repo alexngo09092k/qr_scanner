@@ -80,11 +80,15 @@ class WidgetUtils {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CupertinoActivityIndicator(color: Theme.of(context).colorScheme.onSurface),
+                CupertinoActivityIndicator(
+                    color: Theme.of(context).colorScheme.onSurface),
                 SizedBox(height: AppDimensions.instance.padding),
                 Text(
-                  "Please wait amoment", 
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
+                  "Please wait amoment",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
               ],
             ),
@@ -100,7 +104,8 @@ class WidgetUtils {
         context,
         barrierDismissible: false,
         title: "You are currently offline",
-        message: "Looks like your comnnection is interrupted check network connection and retry.",
+        message:
+            "Looks like your comnnection is interrupted check network connection and retry.",
         actions: [
           AlertAction(title: "Open Settings", onPressed: openAppSettings),
           if (retry != null)
@@ -145,14 +150,17 @@ class WidgetUtils {
     });
   }
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? snack({required String message}) {
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>? snack(
+      {required String message}) {
     return AwesomeAppState.snack(
       builder: (BuildContext context) => SnackBar(
         margin: EdgeInsets.all(AppDimensions.instance.padding),
         padding: EdgeInsets.all(AppDimensions.instance.padding),
         backgroundColor: Theme.of(context).colorScheme.primary,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.instance.radius))),
         content: Text(message, style: Theme.of(context).textTheme.bodyLarge),
       ),
     );
@@ -181,6 +189,6 @@ class WidgetUtils {
   }
 
   void dimiss() {
-    AwesomeAppState.dimiss();
+    AwesomeAppState.dismiss();
   }
 }

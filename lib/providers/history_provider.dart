@@ -6,7 +6,7 @@ import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/providers/storage_provider.dart';
 
-abstract class IHistoryProvider extends StorageProvider with Provider {
+abstract class IHistoryProvider extends Provider implements StorageProvider {
   List<QR> get scanHistory;
 
   List<QR> get generateHistory;
@@ -26,13 +26,12 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
 
   HistoryProvider._internal();
 
-
   final List<QR> _generateHistory = [];
   final List<QR> _scanHistory = [];
 
   @override
   List<QR> get generateHistory => _generateHistory;
-  
+
   @override
   List<QR> get scanHistory => _scanHistory;
 
@@ -40,16 +39,22 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   bool isExists(QR qr) {
     switch (qr.source) {
       case QRSource.scan:
-        List<QR> list = _scanHistory.where((element) => element.rawData == qr.rawData && element.format == qr.format).toList();
-        if(list.isNotEmpty) {
+        List<QR> list = _scanHistory
+            .where((element) =>
+                element.rawData == qr.rawData && element.format == qr.format)
+            .toList();
+        if (list.isNotEmpty) {
           list.first.lastModified = qr.lastModified;
           notifyListeners();
           syncToStorage();
         }
         return list.isNotEmpty;
       case QRSource.generate:
-        List<QR> list = _generateHistory.where((element) => element.rawData == qr.rawData && element.format == qr.format).toList();
-        if(list.isNotEmpty) {
+        List<QR> list = _generateHistory
+            .where((element) =>
+                element.rawData == qr.rawData && element.format == qr.format)
+            .toList();
+        if (list.isNotEmpty) {
           list.first.lastModified = qr.lastModified;
           notifyListeners();
           syncToStorage();
@@ -62,7 +67,7 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
 
   @override
   void addQR(QR qr) {
-    if(isExists(qr)) return;
+    if (isExists(qr)) return;
     bool changed = false;
     switch (qr.source) {
       case QRSource.scan:
@@ -76,7 +81,7 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
       default:
         break;
     }
-    if(changed) notifyListeners();
+    if (changed) notifyListeners();
     syncToStorage();
   }
 
@@ -85,17 +90,19 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
     bool changed = false;
     switch (qr.source) {
       case QRSource.scan:
-        _scanHistory.removeWhere((element) => element.rawData == qr.rawData && element.format == qr.format);
+        _scanHistory.removeWhere((element) =>
+            element.rawData == qr.rawData && element.format == qr.format);
         changed = true;
         break;
       case QRSource.generate:
-        _generateHistory.removeWhere((element) => element.rawData == qr.rawData && element.format == qr.format);
+        _generateHistory.removeWhere((element) =>
+            element.rawData == qr.rawData && element.format == qr.format);
         changed = true;
         break;
       default:
         break;
     }
-    if(changed) notifyListeners();
+    if (changed) notifyListeners();
     syncToStorage();
   }
 
@@ -103,15 +110,17 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   void clean([bool notify = false]) {
     _scanHistory.clear();
     _generateHistory.clear();
-    if(notify) notifyListeners();
+    if (notify) notifyListeners();
   }
 
   @override
   Future<bool> cleanToStorage([bool notify = false]) async {
     clean(notify);
 
-    final result1 = await AsyncStorage.instance.remove(AsyncStorageKey.instance.scanHistory);
-    final result2 = await AsyncStorage.instance.remove(AsyncStorageKey.instance.generateHistory);
+    final result1 = await AsyncStorage.instance
+        .remove(AsyncStorageKey.instance.scanHistory);
+    final result2 = await AsyncStorage.instance
+        .remove(AsyncStorageKey.instance.generateHistory);
 
     return result1 && result2;
   }
@@ -122,24 +131,31 @@ class HistoryProvider extends IHistoryProvider with ProviderDelegate {
   @override
   void syncFromStorage([bool notify = false]) {
     /// SCAN HISTORY
-    String? scanHistoryString = AsyncStorage.instance.getString(AsyncStorageKey.instance.scanHistory);
-    if(scanHistoryString != null) {
+    String? scanHistoryString =
+        AsyncStorage.instance.getString(AsyncStorageKey.instance.scanHistory);
+    if (scanHistoryString != null) {
       Debug.log("============= SCAN HISTORY $scanHistoryString ============");
-      _scanHistory.addAll(jsonDecode(scanHistoryString).map<QR>((_) => QR.fromJson(_)));
+      _scanHistory
+          .addAll(jsonDecode(scanHistoryString).map<QR>((_) => QR.fromJson(_)));
     }
 
     /// GENERATE HISTORY
-    String? generateHistoryString = AsyncStorage.instance.getString(AsyncStorageKey.instance.generateHistory);
-    if(generateHistoryString != null) {
-      Debug.log("============= GENERATE HISTORY $generateHistoryString ============");
-      _generateHistory.addAll(jsonDecode(generateHistoryString).map<QR>((_) => QR.fromJson(_)));
+    String? generateHistoryString = AsyncStorage.instance
+        .getString(AsyncStorageKey.instance.generateHistory);
+    if (generateHistoryString != null) {
+      Debug.log(
+          "============= GENERATE HISTORY $generateHistoryString ============");
+      _generateHistory.addAll(
+          jsonDecode(generateHistoryString).map<QR>((_) => QR.fromJson(_)));
     }
   }
 
   @override
   Future<void> syncToStorage() async {
-    AsyncStorage.instance.setString(AsyncStorageKey.instance.scanHistory, jsonEncode(_scanHistory));
-    AsyncStorage.instance.setString(AsyncStorageKey.instance.generateHistory, jsonEncode(_generateHistory));
+    AsyncStorage.instance.setString(
+        AsyncStorageKey.instance.scanHistory, jsonEncode(_scanHistory));
+    AsyncStorage.instance.setString(
+        AsyncStorageKey.instance.generateHistory, jsonEncode(_generateHistory));
   }
 
   @override

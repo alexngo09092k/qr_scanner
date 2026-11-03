@@ -87,23 +87,25 @@ class _BaseFormState extends State<BaseForm> {
 
     HistoryProvider.instance.addQR(qr);
 
-    AwesomeAppState.dimiss();
+    AwesomeAppState.dismiss();
 
     Navigator.of(context).pushNamed(AppRoutes.viewerPage, arguments: qr);
   }
 
   void close() {
-    AwesomeAppState.dimiss();
+    AwesomeAppState.dismiss();
   }
 
   void onFormatChanged(QRFormat _) {
     format.value = _;
-    if(widget.onQRFormat != null) widget.onQRFormat!(format.value);
+    if (widget.onQRFormat != null) widget.onQRFormat!(format.value);
   }
 
   @override
   Widget build(BuildContext context) {
-    final formatList = QRFormat.values.where((element) => !widget.disableQRFormats.contains(element)).toList();
+    final formatList = QRFormat.values
+        .where((element) => !widget.disableQRFormats.contains(element))
+        .toList();
     return Dialog(
       alignment: Alignment.center,
       insetPadding: EdgeInsets.zero,
@@ -154,42 +156,54 @@ class _BaseFormState extends State<BaseForm> {
                           children: [
                             SizedBox(height: AppDimensions.instance.padding),
                             Wrap(
-                              children: formatList.map((_) => GestureDetector(
-                                onTap: () => onFormatChanged(_),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(AppDimensions.instance.radius)),
-                                    border: Border.all(
-                                      width: 1,
-                                      color: value == _
-                                          ? Theme.of(context).colorScheme.primary
-                                          : Theme.of(context).disabledColor,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.symmetric(
-                                    vertical: AppDimensions.instance.paddingX(0.5),
-                                    horizontal: AppDimensions.instance.paddingX(0.5),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: AppDimensions.instance.padding,
-                                    vertical: AppDimensions.instance.paddingX(0.5),
-                                  ),
-                                  child: Text(
-                                    _.label,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          color: value == _
-                                              ? Theme.of(context)
-                                                  .colorScheme
-                                                  .primary
-                                              : null,
+                                children: formatList
+                                    .map(
+                                      (_) => GestureDetector(
+                                        onTap: () => onFormatChanged(_),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(AppDimensions
+                                                    .instance.radius)),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: value == _
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                  : Theme.of(context)
+                                                      .disabledColor,
+                                            ),
+                                          ),
+                                          margin: EdgeInsets.symmetric(
+                                            vertical: AppDimensions.instance
+                                                .paddingX(0.5),
+                                            horizontal: AppDimensions.instance
+                                                .paddingX(0.5),
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                AppDimensions.instance.padding,
+                                            vertical: AppDimensions.instance
+                                                .paddingX(0.5),
+                                          ),
+                                          child: Text(
+                                            _.label,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge!
+                                                .copyWith(
+                                                  color: value == _
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .primary
+                                                      : null,
+                                                ),
+                                          ),
                                         ),
-                                  ),
-                                ),
-                              ),).toList()
-                            )
+                                      ),
+                                    )
+                                    .toList())
                           ],
                         ),
                       ),
