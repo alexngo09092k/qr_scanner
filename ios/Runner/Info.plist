@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>QR Scanner</string>
+	<string>QRick</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>qr_scanner</string>
+	<string>QRick</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -35,11 +35,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to take the photo from camera</string>
+	<string>QRick needs camera access to scan QR codes and barcodes</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Requesting local network for debugging processes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You must agree with the photo album to see your pictures</string>
+	<string>QRick needs photo library access to scan QR codes from your images</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -96,7 +96,7 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-    <string>This app needs camera access to scan QR codes</string>
+    <string>QRick needs camera access to scan QR codes and barcodes</string>
     
     <key>NSPhotoLibraryUsageDescription</key>
     <string>This app needs photos access to get QR code from photo library</string>

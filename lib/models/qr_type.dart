@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 
 enum QRType {
   link,
@@ -162,6 +164,52 @@ extension QRTypeEx on QRType {
       //   return "PPTX";
       // case QRType.contact:
       //   return "Contact";
+    }
+  }
+
+  String localizedLabel(BuildContext context) {
+    final s = S.of(context);
+    switch (this) {
+      case QRType.crypto:
+        return s.typeCrypto;
+      case QRType.product:
+        return s.typeProduct;
+      case QRType.email:
+        return s.typeEmail;
+      case QRType.facebook:
+        return "Facebook";
+      case QRType.instagram:
+        return "Instagram";
+      case QRType.vcard:
+        return s.typeContact;
+      case QRType.link:
+        return s.typeUrl;
+      case QRType.maps:
+        return s.typeMaps;
+      case QRType.snapchat:
+        return "Snapchat";
+      case QRType.telegram:
+        return "Telegram";
+      case QRType.text:
+        return s.typeText;
+      case QRType.tiktok:
+        return "TikTok";
+      case QRType.douyin:
+        return "Douyin";
+      case QRType.twitter:
+        return "Twitter / X";
+      case QRType.whatsapp:
+        return "WhatsApp";
+      case QRType.wifi:
+        return s.typeWifi;
+      case QRType.youtube:
+        return "YouTube";
+      case QRType.sms:
+        return s.typeSms;
+      case QRType.tel:
+        return s.typePhone;
+      case QRType.event:
+        return s.typeEvent;
     }
   }
 }

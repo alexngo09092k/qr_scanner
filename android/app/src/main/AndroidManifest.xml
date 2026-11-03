@@ -26,7 +26,7 @@
     <application
         android:requestLegacyExternalStorage="true"
         android:preserveLegacyExternalStorage="true"
-        android:label="QR Scanner"
+        android:label="QRick"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:largeHeap="true">

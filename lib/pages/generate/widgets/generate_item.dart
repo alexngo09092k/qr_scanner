@@ -37,7 +37,7 @@ class GenerateItem extends StatelessWidget {
             ),
             SizedBox(height: AppDimensions.instance.paddingX(0.55)),
             Text(
-              type.label,
+              type.localizedLabel(context),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,

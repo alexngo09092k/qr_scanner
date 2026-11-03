@@ -1,3 +1,4 @@
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_sms_form.dart';
@@ -50,13 +51,13 @@ class _SMSFormState extends BaseFormState<SMSForm, QRSMSForm> {
         children: [
           Input(
             // prefixIcon: PrefixIcon(icon: AppAssets.instance.gPhone),
-            hintText: "Your phone number",
+            hintText: S.of(context).hintPhone,
             onChanged:(_) => _onChanged(_SMSField.phoneNumber, _),
           ),
           SizedBox(height: AppDimensions.instance.padding),
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
-            hintText: "Your message",
+            hintText: S.of(context).hintMessage,
             onChanged:(_) => _onChanged(_SMSField.message, _),
           ),
         ],

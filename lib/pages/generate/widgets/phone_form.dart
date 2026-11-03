@@ -1,3 +1,4 @@
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/models/qr_forms/qr_phone_form.dart';
 import 'package:qr_scanner/models/qr_type.dart';
@@ -35,7 +36,7 @@ class _PhoneFormState extends BaseFormState<PhoneForm, QRPhoneForm> {
         children: [
           Input(
             // prefixIcon: PrefixIcon(icon: AppAssets.instance.g),
-            hintText: "Your phone number",
+            hintText: S.of(context).hintPhone,
             onChanged: _onChanged,
           ),
         ],

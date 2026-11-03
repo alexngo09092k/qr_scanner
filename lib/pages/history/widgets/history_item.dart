@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/providers/history_provider.dart';
@@ -20,15 +21,15 @@ class HistoryItem extends StatelessWidget {
   void _onDelete(BuildContext context) {
     WidgetUtils.instance.alert(
       context,
-      title: 'Delete QR?',
-      message: 'Remove this item from history?',
+      title: S.of(context).deleteQR,
+      message: S.of(context).deleteQRMessage,
       actions: [
         AlertAction(
-          title: 'Cancel',
+          title: S.of(context).cancel,
           onPressed: () => Navigator.of(context).pop(),
         ),
         AlertAction(
-          title: 'Delete',
+          title: S.of(context).delete,
           isDestructiveAction: true,
           onPressed: () {
             HistoryProvider.instance.deleteQR(qr);

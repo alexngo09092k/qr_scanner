@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 
 class HistoryTab extends StatelessWidget {
@@ -25,7 +26,7 @@ class HistoryTab extends StatelessWidget {
             child: Row(
               children: QRSource.values.map((source) {
                 final selected = value == source;
-                final label = source == QRSource.scan ? 'Scanned' : 'Generated';
+                final label = source == QRSource.scan ? S.of(context).scanned : S.of(context).generated;
                 return Expanded(
                   child: GestureDetector(
                     onTap: () => onChanged(source),

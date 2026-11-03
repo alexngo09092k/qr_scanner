@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/pages/history/widgets/history_list.dart';
 import 'package:qr_scanner/pages/history/widgets/history_tab.dart';
@@ -53,25 +54,25 @@ class _HistoryPageState extends ProviderStateObserver<HistoryPage, HistoryProvid
   void _clearAll(BuildContext context) {
     final isEmpty = provider.scanHistory.isEmpty && provider.generateHistory.isEmpty;
     if (isEmpty) {
-      WidgetUtils.instance.snack(message: 'History is already empty');
+      WidgetUtils.instance.snack(message: S.of(context).historyEmpty);
       return;
     }
     WidgetUtils.instance.alert(
       context,
-      title: 'Clear history?',
-      message: 'This will delete all scanned and generated QR codes.',
+      title: S.of(context).clearHistory,
+      message: S.of(context).clearHistoryMessage,
       actions: [
         AlertAction(
-          title: 'Cancel',
+          title: S.of(context).cancel,
           onPressed: () => Navigator.of(context).pop(),
         ),
         AlertAction(
-          title: 'Clear',
+          title: S.of(context).clear,
           isDestructiveAction: true,
           onPressed: () async {
             await provider.cleanToStorage(true);
             Navigator.of(context).pop();
-            WidgetUtils.instance.snack(message: 'History cleared');
+            WidgetUtils.instance.snack(message: S.of(context).historyCleared);
           },
         ),
       ],
@@ -81,7 +82,7 @@ class _HistoryPageState extends ProviderStateObserver<HistoryPage, HistoryProvid
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: "History",
+      screen: S.of(context).history,
       appBar: true,
       back: false,
       action: GestureDetector(
@@ -89,7 +90,7 @@ class _HistoryPageState extends ProviderStateObserver<HistoryPage, HistoryProvid
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimensions.instance.padding),
           child: Text(
-            'Clear',
+            S.of(context).clear,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Theme.of(context).colorScheme.error,
                   fontWeight: FontWeight.w600,

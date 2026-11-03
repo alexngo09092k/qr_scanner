@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/providers/scanner_provider.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 
@@ -38,14 +39,14 @@ class ScannerSettings extends ProviderStateless<ScannerProvider> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _SettingButton(
-                  'Gallery',
+                  S.of(context).gallery,
                   icon: AppAssets.instance.icGallery,
                   onPressed: provider.onGallery,
                 ),
                 ValueListenableBuilder(
                   valueListenable: provider.controller.torchState,
                   builder: (_, state, __) => _SettingButton(
-                    'Flash',
+                    S.of(context).flash,
                     icon: AppAssets.instance.icFlashOn,
                     onPressed: provider.onFlashlight,
                     active: state == TorchState.on,
@@ -54,7 +55,7 @@ class ScannerSettings extends ProviderStateless<ScannerProvider> {
                 ValueListenableBuilder(
                   valueListenable: provider.controller.cameraFacingState,
                   builder: (_, state, __) => _SettingButton(
-                    'Flip',
+                    S.of(context).flip,
                     icon: AppAssets.instance.icFlipCamera,
                     onPressed: provider.onCameraFacing,
                     active: state == CameraFacing.front,

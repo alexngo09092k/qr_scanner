@@ -7,6 +7,8 @@ import 'package:qr_scanner/common/theme.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:qr_scanner/generated/l10n.dart';
+
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
@@ -46,14 +48,13 @@ class _AppState extends AwesomeAppState<App> {
           navigatorObservers: [AwesomeApp.observer],
           routes: AppRoutes.instance.routes,
           locale: provider.locale,
-          // localeResolutionCallback: provider.onChangeLocale,
           localizationsDelegates: const [
-            // S.delegate,
+            S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          // supportedLocales: S.delegate.supportedLocales,
+          supportedLocales: S.delegate.supportedLocales,
         );
       },
     );

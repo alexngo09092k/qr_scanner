@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/home_navigation.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 
@@ -14,6 +15,20 @@ class HomeBottomNavigation extends StatelessWidget {
   final HomeNavigation navigation;
   final Function(HomeNavigation) onChange;
   final HomeNavigation current;
+
+  String _label(BuildContext context, HomeNavigation e) {
+    final s = S.of(context);
+    switch (e) {
+      case HomeNavigation.scan:
+        return s.scan;
+      case HomeNavigation.history:
+        return s.history;
+      case HomeNavigation.generate:
+        return s.generate;
+      case HomeNavigation.settings:
+        return s.settings;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +86,7 @@ class HomeBottomNavigation extends StatelessWidget {
                       ),
                       const SizedBox(height: 3),
                       Text(
-                        e.label,
+                        _label(context, e),
                         style: TextStyle(
                           fontSize: 10.5,
                           fontWeight: selected ? FontWeight.w700 : FontWeight.w500,

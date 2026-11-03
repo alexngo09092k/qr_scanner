@@ -1,3 +1,4 @@
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_email.form.dart';
@@ -53,19 +54,19 @@ class _EmailFormState extends BaseFormState<EmailForm, QREmailForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gEmail),
-            hintText: "E-mail recipient",
+            hintText: S.of(context).hintEmail,
             onChanged: (_) => _onChanged(_EmailField.email, _),
           ),
           SizedBox(height: AppDimensions.instance.padding),
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
-            hintText: "Subject",
+            hintText: S.of(context).hintSubject,
             onChanged: (_) => _onChanged(_EmailField.subject, _),
           ),
           SizedBox(height: AppDimensions.instance.padding),
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
-            hintText: "Message",
+            hintText: S.of(context).hintMessage,
             onChanged: (_) => _onChanged(_EmailField.message, _),
           ),
         ],

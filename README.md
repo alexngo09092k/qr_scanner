@@ -1,42 +1,32 @@
-# QR Scanner
+# QRick
 
-Flutter QR Code Scanner & Generator.
+Fast QR & Barcode Scanner. Scan and create QR codes instantly.
 
-## Dependencies
+## Features
+- Scan QR codes and barcodes
+- Generate QR codes for text, URL, Wi-Fi, contact, event, and more
+- History of scanned and generated codes
+- Multi-language support: English, Vietnamese, Thai, Chinese
+- Dark / Light theme
+- Premium (remove ads)
 
-Private packages remain **git** dependencies (do not convert to path):
+## Localization
+ARB files are located in `lib/l10n/`:
+- `intl_en.arb` - English
+- `intl_vi.arb` - Vietnamese
+- `intl_th.arb` - Thai
+- `intl_zh.arb` - Chinese (Simplified)
 
-- `fluttering` → git@github.com:brennan992k/fluttering.git
-- `fluttering_ads`
-- `fluttering_iap`
-- `fluttering_remote_config`
-- `fluttering_analytics`
-
-You need SSH access to those repos (or replace URLs with your access method).
-
+After changing ARB files, regenerate with:
 ```bash
 flutter pub get
-flutter run
+flutter pub run intl_utils:generate
+# or if using flutter_intl:
+# flutter packages pub run intl_utils:generate
 ```
 
-## Completed features (this delivery)
+## Package ID
+- Android / iOS: `com.snapeditify.scanner` (unchanged)
 
-| Area | What was finished |
-|------|-------------------|
-| **MaintenancePage** | Full UI from remote/business config (title, message, link) |
-| **PremiumPage** | Remove-ads purchase UI + AwesomeIAP |
-| **ViewerPage** | Open / Call / Email / SMS / Maps, Copy, Share, Delete |
-| **ScannerResult** | Thumbnail badge after scan, tap → viewer |
-| **ScannerOverlay** | Dim overlay with scan-window cutout |
-| **Scanner flow** | After camera/gallery detect → vibrate + history + navigate Viewer |
-| **History** | Delete item (tap icon / long-press), Clear all |
-| **Settings** | Go Premium entry |
-| **AppRoutes** | premium route in onGenerateRoute |
-
-## Existing features (already in source)
-
-- Live scan (mobile_scanner), gallery, flashlight, camera switch, zoom
-- Generate 20+ QR types with forms
-- History scan/generate + local storage
-- Splash → home / maintenance by appMode
-- Ads / IAP / Analytics / Remote Config via fluttering_* packages
+## App Display Name
+- QRick

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:fluttering_iap/fluttering_iap.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/utils/widget.dart';
 import 'package:qr_scanner/widgets/app_use/app_layout.dart';
 import 'package:qr_scanner/widgets/base/app_card.dart';
@@ -14,7 +15,8 @@ class PremiumPage extends StatefulWidget {
   State<PremiumPage> createState() => _PremiumPageState();
 }
 
-class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> {
+class _PremiumPageState
+    extends ProviderStateObserver<PremiumPage, IAwesomeIAP> {
   bool _purchasing = false;
 
   Future<void> _purchase(IAPProduct product) async {
@@ -23,14 +25,14 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
     try {
       await provider.purchase(product);
       if (mounted) {
-        WidgetUtils.instance.snack(message: 'Purchase completed. Thank you!');
+        WidgetUtils.instance.snack(message: S.of(context).purchaseCompleted);
       }
     } catch (e) {
       Debug.log('Purchase error: $e');
       if (mounted) {
         WidgetUtils.instance.showWarningPopup(
-          title: 'Purchase failed',
-          message: 'Unable to complete purchase. Please try again.',
+          title: S.of(context).purchaseFailed,
+          message: S.of(context).purchaseFailedMessage,
         );
       }
     } finally {
@@ -45,7 +47,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
     final alreadyPurchased = primaryProduct?.status == true;
 
     return AppLayout(
-      screen: 'Go Premium',
+      screen: S.of(context).goPremium,
       appBar: true,
       back: true,
       scroll: true,
@@ -57,7 +59,8 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
           padding: EdgeInsets.all(AppDimensions.instance.paddingX(2)),
           decoration: BoxDecoration(
             gradient: AppColors.instance.gradient,
-            borderRadius: BorderRadius.circular(AppDimensions.instance.radius * 1.5),
+            borderRadius:
+                BorderRadius.circular(AppDimensions.instance.radius * 1.5),
             boxShadow: [AppColors.instance.boxShadow],
           ),
           child: Column(
@@ -69,20 +72,26 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
               ),
               SizedBox(height: AppDimensions.instance.padding),
               Text(
-                alreadyPurchased ? 'You are Premium' : 'Remove Ads',
+                alreadyPurchased
+                    ? S.of(context).youArePremium
+                    : S.of(context).removeAds,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontWeight: FontWeight.w800, letterSpacing: -0.3,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.3,
                     ),
               ),
               SizedBox(height: AppDimensions.instance.paddingX(0.5)),
               Text(
                 alreadyPurchased
-                    ? 'Enjoy unlimited scanning without ads'
-                    : 'Unlock a clean, ad-free scanning experience',
+                    ? S.of(context).enjoyUnlimited
+                    : S.of(context).unlockAdFree,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.9),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withOpacity(0.9),
                     ),
               ),
             ],
@@ -92,23 +101,23 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
         AppCard(
           padding: EdgeInsets.all(AppDimensions.instance.padding),
           child: Column(
-            children: const [
+            children: [
               _BenefitRow(
                 icon: Icons.block,
-                title: 'No more ads',
-                subtitle: 'Scan and generate without interruptions',
+                title: S.of(context).noMoreAds,
+                subtitle: S.of(context).noMoreAdsSubtitle,
               ),
               Divider(height: 24),
               _BenefitRow(
                 icon: Icons.bolt,
-                title: 'Faster experience',
-                subtitle: 'Less loading, more productivity',
+                title: S.of(context).fasterExperience,
+                subtitle: S.of(context).fasterExperienceSubtitle,
               ),
               Divider(height: 24),
               _BenefitRow(
                 icon: Icons.favorite,
-                title: 'Support development',
-                subtitle: 'Help us keep improving the app',
+                title: S.of(context).supportDev,
+                subtitle: S.of(context).supportDevSubtitle,
               ),
             ],
           ),
@@ -116,7 +125,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
         SizedBox(height: AppDimensions.instance.paddingX(2)),
         if (alreadyPurchased)
           CustomButton(
-            title: 'Premium active',
+            title: S.of(context).premiumActive,
             height: 54,
             width: double.infinity,
             isDisabled: true,
@@ -124,7 +133,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
           )
         else if (primaryProduct != null) ...[
           CustomButton(
-            title: primaryProduct.info?.name ?? 'Remove Ads',
+            title: primaryProduct.info?.name ?? S.of(context).removeAds,
             height: 54,
             width: double.infinity,
             isLoading: _purchasing,
@@ -136,18 +145,22 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        primaryProduct.info?.name ?? 'Remove Ads',
+                        primaryProduct.info?.name ?? S.of(context).removeAds,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onPrimary,
                           fontSize: 16,
-                          fontWeight: FontWeight.w800, letterSpacing: -0.3,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: -0.3,
                         ),
                       ),
                       if (primaryProduct.info != null)
                         Text(
                           primaryProduct.info!.price,
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.9),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimary
+                                .withOpacity(0.9),
                             fontSize: 13,
                           ),
                         ),
@@ -166,7 +179,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
           ],
         ] else
           CustomButton(
-            title: 'Premium unavailable',
+            title: S.of(context).premiumUnavailable,
             height: 50,
             width: double.infinity,
             isDisabled: true,
@@ -174,7 +187,7 @@ class _PremiumPageState extends ProviderStateObserver<PremiumPage, IAwesomeIAP> 
           ),
         SizedBox(height: AppDimensions.instance.paddingX(2)),
         Text(
-          'Payment is processed securely by the store. You can restore purchases from your store account.',
+          S.of(context).paymentSecure,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).disabledColor,
@@ -208,7 +221,8 @@ class _BenefitRow extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary.withOpacity(0.12),
             borderRadius: BorderRadius.circular(AppDimensions.instance.radius),
           ),
-          child: Icon(icon, color: Theme.of(context).colorScheme.primary, size: 22),
+          child: Icon(icon,
+              color: Theme.of(context).colorScheme.primary, size: 22),
         ),
         SizedBox(width: AppDimensions.instance.padding),
         Expanded(
@@ -217,7 +231,10 @@ class _BenefitRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 2),
               Text(

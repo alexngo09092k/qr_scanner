@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
@@ -45,26 +46,27 @@ class ViewerPage extends StatelessWidget {
     }
   }
 
-  String get _openLabel {
+  String _openLabel(BuildContext context) {
+    final s = S.of(context);
     switch (qr.type) {
       case QRType.email:
-        return 'Send Email';
+        return s.sendEmail;
       case QRType.tel:
-        return 'Call';
+        return s.call;
       case QRType.sms:
-        return 'Send SMS';
+        return s.sendSMS;
       case QRType.maps:
-        return 'Open Maps';
+        return s.openMaps;
       case QRType.wifi:
-        return 'Wi-Fi Info';
+        return s.wifiInfo;
       default:
-        return 'Open';
+        return s.open;
     }
   }
 
   Future<void> _copy(BuildContext context) async {
     await Clipboard.setData(ClipboardData(text: qr.rawData));
-    WidgetUtils.instance.snack(message: 'Copied to clipboard');
+    WidgetUtils.instance.snack(message: S.of(context).copiedToClipboard);
   }
 
   Future<void> _share() async {
@@ -114,16 +116,16 @@ class ViewerPage extends StatelessWidget {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else if (context.mounted) {
         WidgetUtils.instance.showWarningPopup(
-          title: 'Open failed',
-          message: 'Cannot open this content. Please try copy instead.',
+          title: S.of(context).openFailed,
+          message: S.of(context).cannotOpenContent,
         );
       }
     } catch (e) {
       Debug.log('Open error: $e');
       if (context.mounted) {
         WidgetUtils.instance.showWarningPopup(
-          title: 'Open failed',
-          message: 'Cannot open this content.',
+          title: S.of(context).openFailed,
+          message: S.of(context).cannotOpenContent,
         );
       }
     }
@@ -132,15 +134,15 @@ class ViewerPage extends StatelessWidget {
   void _delete(BuildContext context) {
     WidgetUtils.instance.alert(
       context,
-      title: 'Delete QR?',
-      message: 'This QR will be removed from history.',
+      title: S.of(context).deleteQR,
+      message: S.of(context).deleteQRMessage,
       actions: [
         AlertAction(
-          title: 'Cancel',
+          title: S.of(context).cancel,
           onPressed: () => Navigator.of(context).pop(),
         ),
         AlertAction(
-          title: 'Delete',
+          title: S.of(context).delete,
           isDestructiveAction: true,
           onPressed: () {
             HistoryProvider.instance.deleteQR(qr);
@@ -160,7 +162,7 @@ class ViewerPage extends StatelessWidget {
     final barcodeSize = AwesomeAppState.screen.width * 0.65;
 
     return AppLayout(
-      screen: qr.type.label,
+      screen: qr.type.localizedLabel(context),
       appBar: true,
       back: true,
       scroll: true,
@@ -211,14 +213,14 @@ class ViewerPage extends StatelessWidget {
                   ),
                   SizedBox(width: AppDimensions.instance.paddingX(0.5)),
                   Text(
-                    qr.type.label,
+                    qr.type.localizedLabel(context),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                   ),
                   const Spacer(),
                   Text(
-                    qr.source == QRSource.scan ? 'Scanned' : 'Generated',
+                    qr.source == QRSource.scan ? S.of(context).scanned : S.of(context).generated,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).disabledColor,
                         ),
@@ -236,7 +238,7 @@ class ViewerPage extends StatelessWidget {
         SizedBox(height: AppDimensions.instance.paddingX(1.5)),
         if (_canOpen)
           CustomButton(
-            title: _openLabel,
+            title: _openLabel(context),
             height: 50,
             width: double.infinity,
             onTap: () => _open(context),
@@ -247,7 +249,7 @@ class ViewerPage extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                title: 'Copy',
+                title: S.of(context).copy,
                 height: 50,
                 color: Theme.of(context).colorScheme.surface,
                 titleColor: Theme.of(context).colorScheme.onSurface,
@@ -257,7 +259,7 @@ class ViewerPage extends StatelessWidget {
             SizedBox(width: AppDimensions.instance.padding),
             Expanded(
               child: CustomButton(
-                title: 'Share',
+                title: S.of(context).share,
                 height: 50,
                 color: Theme.of(context).colorScheme.surface,
                 titleColor: Theme.of(context).colorScheme.onSurface,
@@ -268,7 +270,7 @@ class ViewerPage extends StatelessWidget {
         ),
         SizedBox(height: AppDimensions.instance.padding),
         CustomButton(
-          title: 'Delete',
+          title: S.of(context).delete,
           height: 50,
           width: double.infinity,
           color: Theme.of(context).colorScheme.error.withOpacity(0.15),

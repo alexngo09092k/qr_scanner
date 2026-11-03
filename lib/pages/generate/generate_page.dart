@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/pages/generate/widgets/crypto_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/douyin_form.dart';
@@ -85,7 +86,7 @@ class GeneratePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
-      screen: "Generate",
+      screen: S.of(context).generate,
       appBar: true,
       back: false,
       children: [

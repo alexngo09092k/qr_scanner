@@ -1,3 +1,4 @@
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_text_form.dart';
@@ -38,7 +39,7 @@ class _TextFormState extends BaseFormState<TextForm, QRTextForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
-            hintText: "Your text",
+            hintText: S.of(context).hintYourText,
             onChanged: _onChanged,
           ),
         ],

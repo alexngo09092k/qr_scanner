@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/configuration.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/widgets/app_use/app_layout.dart';
 import 'package:qr_scanner/widgets/base/custom_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,7 +24,7 @@ class MaintenancePage extends StatelessWidget {
     final mode = Configuration.instance.business.maintenanceMode;
 
     return AppLayout(
-      screen: 'Maintenance',
+      screen: S.of(context).maintenance,
       appBar: false,
       back: false,
       useSafeArea: true,
@@ -38,7 +39,7 @@ class MaintenancePage extends StatelessWidget {
         ),
         SizedBox(height: AppDimensions.instance.paddingX(1.5)),
         Text(
-          mode.title.isNotEmpty ? mode.title : "We'll be back soon",
+          mode.title.isNotEmpty ? mode.title : S.of(context).maintenance,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class MaintenancePage extends StatelessWidget {
         Text(
           mode.message.isNotEmpty
               ? mode.message
-              : "We're performing maintenance. Please check back soon.",
+              : S.of(context).maintenanceMessage,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).disabledColor,
@@ -57,7 +58,7 @@ class MaintenancePage extends StatelessWidget {
         if (mode.link.isNotEmpty) ...[
           SizedBox(height: AppDimensions.instance.paddingX(2)),
           CustomButton(
-            title: 'Learn more',
+            title: S.of(context).learnMore,
             height: 50,
             width: double.infinity,
             gradient: AppColors.instance.gradient,

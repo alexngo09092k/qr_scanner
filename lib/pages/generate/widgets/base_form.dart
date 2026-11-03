@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import 'package:qr_scanner/common/app_routes.dart';
 import 'package:qr_scanner/common/constants.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:qr_scanner/models/qr.dart';
 import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
@@ -121,7 +122,7 @@ class _BaseFormState extends State<BaseForm> {
               children: [
                 Expanded(
                   child: Text(
-                    "Generate QR for ${widget.qrType.label}",
+                    S.of(context).generateQRFor(widget.qrType.localizedLabel(context)),
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Theme.of(context).colorScheme.primary,
@@ -218,14 +219,14 @@ class _BaseFormState extends State<BaseForm> {
                 ? ValueListenableBuilder(
                     valueListenable: widget.isDisabled!,
                     builder: (_, value, __) => CustomButton(
-                      title: "Generate",
+                      title: S.of(context).generate,
                       onTap: onGenerate,
                       height: 50,
                       isDisabled: value,
                     ),
                   )
                 : CustomButton(
-                    title: "Generate",
+                    title: S.of(context).generate,
                     onTap: onGenerate,
                     height: 50,
                   ),

@@ -1,3 +1,4 @@
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_link_form.dart';
@@ -38,7 +39,7 @@ class _LinkFormState extends BaseFormState<LinkForm, QRLinkForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gLink),
-            hintText: "Put your link here",
+            hintText: S.of(context).hintPutLink,
             onChanged: _onChanged,
           ),
         ],

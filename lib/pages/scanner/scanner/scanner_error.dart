@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ScannerError extends StatelessWidget {
@@ -12,16 +13,16 @@ class ScannerError extends StatelessWidget {
 
     switch (error.errorCode) {
       case MobileScannerErrorCode.controllerUninitialized:
-        errorMessage = 'Controller not ready.';
+        errorMessage = S.of(context).controllerNotReady;
         break;
       case MobileScannerErrorCode.permissionDenied:
-        errorMessage = 'Permission denied';
+        errorMessage = S.of(context).permissionDenied;
         break;
       case MobileScannerErrorCode.unsupported:
-        errorMessage = 'Scanning is unsupported on this device';
+        errorMessage = S.of(context).scanningUnsupported;
         break;
       default:
-        errorMessage = 'Generic Error';
+        errorMessage = S.of(context).genericError;
         break;
     }
 

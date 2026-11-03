@@ -1,3 +1,4 @@
+import 'package:qr_scanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_scanner/common/constants.dart';
 import 'package:qr_scanner/models/qr_forms/qr_wifi_form.dart';
@@ -58,7 +59,7 @@ class _WifiFormState extends BaseFormState<WifiForm, QRWifiForm> {
         children: [
           Input(
             prefixIcon: PrefixIcon(icon: AppAssets.instance.gWifi),
-            hintText: "Network SSID (Name)",
+            hintText: S.of(context).hintNetwork,
             onChanged: (_) => _onChanged(_WifiField.ssid, _),
           ),
           SizedBox(height: AppDimensions.instance.padding),
@@ -68,7 +69,7 @@ class _WifiFormState extends BaseFormState<WifiForm, QRWifiForm> {
               Expanded(
                 child: Input(
                   prefixIcon: PrefixIcon(icon: AppAssets.instance.gText),
-                  hintText: "Password",
+                  hintText: S.of(context).hintPassword,
                   onChanged: (_) => _onChanged(_WifiField.password, _),
                 ),
               ),
@@ -124,7 +125,7 @@ class __HiddenCheckBoxState extends State<_HiddenCheckBox> {
           value: hidden,
           onChanged: _onChanged,
         ),
-        Text("Hidden", style: Theme.of(context).textTheme.bodyLarge)
+        Text(S.of(context).hiddenNetwork, style: Theme.of(context).textTheme.bodyLarge)
       ],
     );
   }

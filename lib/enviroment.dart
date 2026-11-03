@@ -22,7 +22,7 @@ const enviroment = {
     },
 
     /// Display name is used in app
-    'appName': 'QR Scanner & Barcode Lookup',
+    'appName': 'QRick',
 
     /// Version
     'version': '1.0.0',
@@ -92,7 +92,7 @@ const enviroment = {
     /// Share app
     'shareApp': {
       'message':
-          'QR Scanner & Barcode Lookup. Extremely fast QR & barcode scanner that supports all QR & barcode formats!',
+          'QRick - Fast QR & Barcode Scanner. Scan and create QR codes instantly!',
       'links': {
         'android': 'https://appgallery.huawei.com/app/C108714985',
         'ios': 'https://appgallery.huawei.com/app/C108714985',
