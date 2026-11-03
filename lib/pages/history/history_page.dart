@@ -7,6 +7,7 @@ import 'package:qr_scanner/pages/history/widgets/history_tab.dart';
 import 'package:qr_scanner/providers/history_provider.dart';
 import 'package:qr_scanner/utils/widget.dart';
 import 'package:qr_scanner/widgets/app_use/app_layout.dart';
+import 'package:qr_scanner/widgets/base/ad_view.dart';
 import 'package:qr_scanner/widgets/base/custom_alert.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -101,6 +102,7 @@ class _HistoryPageState extends ProviderStateObserver<HistoryPage, HistoryProvid
           tab: _tab,
           onChanged: _onChanged,
         ),
+        const AdView(),
         SizedBox(height: AppDimensions.instance.padding),
         Expanded(
           child: PageView(

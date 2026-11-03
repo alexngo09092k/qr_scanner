@@ -24,6 +24,7 @@ import 'package:qr_scanner/pages/generate/widgets/wifi_form.dart';
 import 'package:qr_scanner/pages/generate/widgets/youtube_form.dart';
 import 'package:qr_scanner/utils/widget.dart';
 import 'package:qr_scanner/widgets/app_use/app_layout.dart';
+import 'package:qr_scanner/widgets/base/ad_view.dart';
 
 class GeneratePage extends StatelessWidget {
   const GeneratePage({super.key});
@@ -88,6 +89,7 @@ class GeneratePage extends StatelessWidget {
       appBar: true,
       back: false,
       children: [
+        const AdView(),
         Expanded(
           child: GridView.builder(
             padding: EdgeInsets.only(

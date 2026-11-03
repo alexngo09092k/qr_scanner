@@ -139,6 +139,7 @@ const enviroment = {
         "provider": "huawei",
         "iosId": "j1hv8l85y4",
         "androidId": "j1hv8l85y4",
+        "waitingTimeToDisplay": 300,
       },
       {
         "type": "reward",

@@ -11,6 +11,7 @@ import 'package:qr_scanner/providers/history_provider.dart';
 import 'package:qr_scanner/utils/qr.dart';
 import 'package:qr_scanner/utils/widget.dart';
 import 'package:qr_scanner/widgets/app_use/app_layout.dart';
+import 'package:qr_scanner/widgets/base/ad_view.dart';
 import 'package:qr_scanner/widgets/base/app_card.dart';
 import 'package:qr_scanner/widgets/base/custom_alert.dart';
 import 'package:qr_scanner/widgets/base/custom_button.dart';
@@ -274,6 +275,7 @@ class ViewerPage extends StatelessWidget {
           titleColor: Theme.of(context).colorScheme.error,
           onTap: () => _delete(context),
         ),
+        const AdView(),
         SizedBox(height: AppDimensions.instance.paddingX(2)),
       ],
     );

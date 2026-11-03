@@ -29,6 +29,7 @@ import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/models/scanner_settings.dart';
 import 'package:qr_scanner/providers/history_provider.dart';
+import 'package:qr_scanner/utils/monetization.dart';
 import 'package:qr_scanner/providers/storage_provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:vibration/vibration.dart';
@@ -109,6 +110,8 @@ class ScannerProvider extends IScannerProvider with ProviderDelegate {
       if (nav != null) {
         nav.pushNamed(AppRoutes.viewerPage, arguments: detected);
       }
+      // Frequency-capped interstitial (skipped if premium)
+      Monetization.instance.onHighValueAction();
     }
   }
 

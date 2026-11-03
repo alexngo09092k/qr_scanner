@@ -7,6 +7,7 @@ import 'package:qr_scanner/models/qr_format.dart';
 import 'package:qr_scanner/models/qr_source.dart';
 import 'package:qr_scanner/models/qr_type.dart';
 import 'package:qr_scanner/providers/history_provider.dart';
+import 'package:qr_scanner/utils/monetization.dart';
 import 'package:qr_scanner/widgets/base/custom_button.dart';
 import 'package:qr_scanner/widgets/base/custom_icon.dart';
 
@@ -90,6 +91,7 @@ class _BaseFormState extends State<BaseForm> {
     AwesomeAppState.dismiss();
 
     Navigator.of(context).pushNamed(AppRoutes.viewerPage, arguments: qr);
+    Monetization.instance.onHighValueAction();
   }
 
   void close() {
