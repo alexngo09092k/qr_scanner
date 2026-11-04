@@ -116,8 +116,7 @@ const enviroment = {
         "name": "Candy Land Puzzle: Match Game",
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/6124af2abde64858915de34600bf4e24.png",
-        "desc":
-            "Candy Land Puzzle is a new and stylish candy match 3 puzzle game, available...",
+        "desc": "Candy Land Puzzle is a new and stylish candy...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108228683",
           "ios": "https://appgallery.huawei.com/app/C108228683",
@@ -128,8 +127,7 @@ const enviroment = {
         "name": "Fall Dudes 3D: Amazing Run",
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/ae2086a83fd64cc9bde0d41b0305f20b.png",
-        "desc":
-            "Fall Dudes 3D: Super Tricky Amazing Run Run is a game with many levels...",
+        "desc": "Fall Dudes 3D: Super Tricky Amazing...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108199945",
           "ios": "https://appgallery.huawei.com/app/C108199945",
@@ -140,8 +138,7 @@ const enviroment = {
         "name": "Car Mega Ramps",
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/6575b038b8534b3387bc4d1e6be163ac.png",
-        "desc":
-            "Car Mega Ramps games has an addictive and sensational interface where you will...",
+        "desc": "Car Mega Ramps games has an...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108175001",
           "ios": "https://appgallery.huawei.com/app/C108175001",
@@ -152,8 +149,7 @@ const enviroment = {
         "name": "Sweet Ice Cream Maker",
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/c5da0f730f4343269bd6bcd430315397.png",
-        "desc":
-            "Are you an ice cream lover? You will definitely like ice cream games...",
+        "desc": "Are you an ice cream lover? You will...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108210943",
           "ios": "https://appgallery.huawei.com/app/C108210943",
