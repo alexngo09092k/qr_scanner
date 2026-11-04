@@ -117,7 +117,7 @@ const enviroment = {
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/6124af2abde64858915de34600bf4e24.png",
         "desc":
-            "Candy Land Puzzle is a new and stylish candy match 3 puzzle game, available for no matter adults or kids for all ages.!",
+            "Candy Land Puzzle is a new and stylish candy match 3 puzzle game, available...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108228683",
           "ios": "https://appgallery.huawei.com/app/C108228683",
@@ -129,7 +129,7 @@ const enviroment = {
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/ae2086a83fd64cc9bde0d41b0305f20b.png",
         "desc":
-            "Fall Dudes 3D: Super Tricky Amazing Run Run is a game with many levels and crazy obstacles waiting for you!",
+            "Fall Dudes 3D: Super Tricky Amazing Run Run is a game with many levels...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108199945",
           "ios": "https://appgallery.huawei.com/app/C108199945",
@@ -141,7 +141,7 @@ const enviroment = {
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/6575b038b8534b3387bc4d1e6be163ac.png",
         "desc":
-            "Car Mega Ramps games has an addictive and sensational interface where you will perform stunt racing efficiently on mega ramps.",
+            "Car Mega Ramps games has an addictive and sensational interface where you will...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108175001",
           "ios": "https://appgallery.huawei.com/app/C108175001",
@@ -153,7 +153,7 @@ const enviroment = {
         "logo":
             "https://appimg2.dbankcdn.com/application/icon144/65/c5da0f730f4343269bd6bcd430315397.png",
         "desc":
-            "Are you an ice cream lover? You will definitely like ice cream games. Here we have different varieties of Sweet Ice Cream Maker. ",
+            "Are you an ice cream lover? You will definitely like ice cream games...",
         "links": {
           "android": "https://appgallery.huawei.com/app/C108210943",
           "ios": "https://appgallery.huawei.com/app/C108210943",
