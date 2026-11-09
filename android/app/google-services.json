@@ -1,79 +1,64 @@
 {
   "project_info": {
-    "project_number": "46126186324",
-    "project_id": "hasoft-701a0",
-    "storage_bucket": "hasoft-701a0.appspot.com"
+    "project_number": "851709128615",
+    "project_id": "snapeditify-67a19",
+    "storage_bucket": "snapeditify-67a19.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:46126186324:android:a76dc03576a15129ae52c1",
+        "mobilesdk_app_id": "1:851709128615:android:663d46bc83eddfeca19082",
         "android_client_info": {
-          "package_name": "com.snapeditify.scanner"
+          "package_name": "app.snapeditify.studio"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "46126186324-a9je8mdkmft4gkt7n78bc7jfs9pvk0fe.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCFwntKU6qlGRB44ng5g6h2X6IY6JfSESk"
+          "current_key": "AIzaSyAEcOFJkT6sd_RgmNSll5luj7c0LYAenEo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "46126186324-a9je8mdkmft4gkt7n78bc7jfs9pvk0fe.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "46126186324-9i1sr5u8t01ejg247c6479ennfuv9ads.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.qrScanner"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:46126186324:android:287b1f03ae34f3bbae52c1",
+        "mobilesdk_app_id": "1:851709128615:android:a2d9415b638ca74ba19082",
         "android_client_info": {
-          "package_name": "com.hasoft.candychristmas.huawei"
+          "package_name": "com.snapeditify.scanner"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "46126186324-a9je8mdkmft4gkt7n78bc7jfs9pvk0fe.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCFwntKU6qlGRB44ng5g6h2X6IY6JfSESk"
+          "current_key": "AIzaSyAEcOFJkT6sd_RgmNSll5luj7c0LYAenEo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "46126186324-a9je8mdkmft4gkt7n78bc7jfs9pvk0fe.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "46126186324-9i1sr5u8t01ejg247c6479ennfuv9ads.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.qrScanner"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851709128615:android:21911677c9621d59a19082",
+        "android_client_info": {
+          "package_name": "com.snapeditify.stillhere"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEcOFJkT6sd_RgmNSll5luj7c0LYAenEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

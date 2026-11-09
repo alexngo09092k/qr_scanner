@@ -1,5 +1,1 @@
-{
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
-  }
-}
+{"flutter":{"platforms":{"android":{"default":{"projectId":"snapeditify-67a19","appId":"1:851709128615:android:a2d9415b638ca74ba19082","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"snapeditify-67a19","appId":"1:851709128615:ios:e8d964ddb7ed2486a19082","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"snapeditify-67a19","appId":"1:851709128615:ios:824af7047cb906cfa19082","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"snapeditify-67a19","configurations":{"android":"1:851709128615:android:a2d9415b638ca74ba19082","ios":"1:851709128615:ios:e8d964ddb7ed2486a19082","macos":"1:851709128615:ios:824af7047cb906cfa19082","web":"1:851709128615:web:539e54e8b8f68a0aa19082","windows":"1:851709128615:web:539e54e8b8f68a0aa19082"}}}}}}

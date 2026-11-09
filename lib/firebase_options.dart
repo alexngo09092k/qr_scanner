@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,40 +41,46 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB2uw_mofoGqYDciskWE_jUCy7q25bTqko',
-    appId: '1:46126186324:web:e8eb967b590d489bae52c1',
-    messagingSenderId: '46126186324',
-    projectId: 'hasoft-701a0',
-    authDomain: 'hasoft-701a0.firebaseapp.com',
-    storageBucket: 'hasoft-701a0.appspot.com',
-    measurementId: 'G-5CNY8QMPM0',
+    apiKey: 'AIzaSyCwQtpG-PxqA-ZOmIJME8Ld6-HczJYGkZI',
+    appId: '1:851709128615:web:539e54e8b8f68a0aa19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    authDomain: 'snapeditify-67a19.firebaseapp.com',
+    storageBucket: 'snapeditify-67a19.firebasestorage.app',
+    measurementId: 'G-40GXQJWXNV',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCFwntKU6qlGRB44ng5g6h2X6IY6JfSESk',
-    appId: '1:46126186324:android:a76dc03576a15129ae52c1',
-    messagingSenderId: '46126186324',
-    projectId: 'hasoft-701a0',
-    storageBucket: 'hasoft-701a0.appspot.com',
+    apiKey: 'AIzaSyAEcOFJkT6sd_RgmNSll5luj7c0LYAenEo',
+    appId: '1:851709128615:android:a2d9415b638ca74ba19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    storageBucket: 'snapeditify-67a19.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB_rrRbvpHz76eEOBWqjvyQxvK0SNgagJw',
-    appId: '1:46126186324:ios:f182df561015358eae52c1',
-    messagingSenderId: '46126186324',
-    projectId: 'hasoft-701a0',
-    storageBucket: 'hasoft-701a0.appspot.com',
-    iosClientId: '46126186324-9i1sr5u8t01ejg247c6479ennfuv9ads.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCsHaOMewpPcGbdClTv05F7yA5OHRQTu3I',
+    appId: '1:851709128615:ios:e8d964ddb7ed2486a19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    storageBucket: 'snapeditify-67a19.firebasestorage.app',
+    iosBundleId: 'com.snapeditify.scanner',
+  );
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCsHaOMewpPcGbdClTv05F7yA5OHRQTu3I',
+    appId: '1:851709128615:ios:824af7047cb906cfa19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    storageBucket: 'snapeditify-67a19.firebasestorage.app',
     iosBundleId: 'com.example.qrScanner',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB_rrRbvpHz76eEOBWqjvyQxvK0SNgagJw',
-    appId: '1:46126186324:ios:699052d056f5a537ae52c1',
-    messagingSenderId: '46126186324',
-    projectId: 'hasoft-701a0',
-    storageBucket: 'hasoft-701a0.appspot.com',
-    iosClientId: '46126186324-a5shcmrl8g9l4d4kvj3ahp7r4f3sfl2v.apps.googleusercontent.com',
-    iosBundleId: 'com.example.qrScanner.RunnerTests',
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCwQtpG-PxqA-ZOmIJME8Ld6-HczJYGkZI',
+    appId: '1:851709128615:web:539e54e8b8f68a0aa19082',
+    messagingSenderId: '851709128615',
+    projectId: 'snapeditify-67a19',
+    authDomain: 'snapeditify-67a19.firebaseapp.com',
+    storageBucket: 'snapeditify-67a19.firebasestorage.app',
+    measurementId: 'G-40GXQJWXNV',
   );
 }
