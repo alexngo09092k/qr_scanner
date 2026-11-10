@@ -25,7 +25,7 @@ const enviroment = {
     'appName': 'QRick',
 
     /// Version
-    'version': '1.0.0',
+    'version': '1.0.3',
 
     /// Logo is used in splash screen and app ui
     'appLogo': 'assets/images/logo.png',
@@ -102,7 +102,7 @@ const enviroment = {
 
     /// Update app
     'updateApp': {
-      'version': '1.0.2',
+      'version': '1.0.3',
       'required': false,
       'links': {
         'android': 'https://appgallery.huawei.com/app/C108714985',
