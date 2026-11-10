@@ -209,7 +209,7 @@ const enviroment = {
       {
         "type": "nonConsumables",
         "provider": "huawei",
-        "id": "app.still_here.studio.amonth",
+        "id": "com.snapeditify.scanner.amonth",
         "info": {
           "name": "Premium Monthly",
           "description": "Remove ads and unlock premium features for 1 month.",
@@ -221,7 +221,7 @@ const enviroment = {
       {
         "type": "nonConsumables",
         "provider": "huawei",
-        "id": "app.still_here.studio.oneyear",
+        "id": "com.snapeditify.scanner.oneyear",
         "info": {
           "name": "Premium Yearly",
           "description": "Remove ads and unlock premium features for 1 year.",
