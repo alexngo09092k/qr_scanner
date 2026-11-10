@@ -209,15 +209,26 @@ const enviroment = {
       {
         "type": "nonConsumables",
         "provider": "huawei",
-        "id": "com.snapeditify.scanner.removeads",
+        "id": "app.still_here.studio.amonth",
         "info": {
-          "name": "A Month",
-          "description":
-              "This is lisence for remove ads use us service like. Thanks for purchase.",
+          "name": "Premium Monthly",
+          "description": "Remove ads and unlock premium features for 1 month.",
           "price": "\$2.99",
-          "rawPrice": '2.99',
+          "rawPrice": "2.99",
           "currency": "USD",
-        }
+        },
+      },
+      {
+        "type": "nonConsumables",
+        "provider": "huawei",
+        "id": "app.still_here.studio.oneyear",
+        "info": {
+          "name": "Premium Yearly",
+          "description": "Remove ads and unlock premium features for 1 year.",
+          "price": "\$19.99",
+          "rawPrice": "19.99",
+          "currency": "USD",
+        },
       },
     ],
   },
