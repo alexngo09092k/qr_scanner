@@ -102,7 +102,7 @@ const enviroment = {
 
     /// Update app
     'updateApp': {
-      'version': '1.0.3',
+      'version': '1.0.2',
       'required': false,
       'links': {
         'android': 'https://appgallery.huawei.com/app/C108714985',
